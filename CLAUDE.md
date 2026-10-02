@@ -1,0 +1,19 @@
+# CLAUDE.md
+
+Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedmanee <-> US QWERTY) and fix it on Linux. Deadline 2026-10-08. Plan and daily checklist: IMPLEMENTATION_PLAN.md (Thai).
+
+## Commands
+- `uv sync` (dev), `uv sync --extra data --extra ml` (dataset/training phase), `--extra demo` for the evdev/uinput daemon
+- `uv run pytest` runs tests and doctests in `src/`
+- `uv run python scripts/verify_layout.py` checks `src/luem/layout.py` against `/usr/share/X11/xkb/symbols/th`
+
+## Conventions
+- Layout mapping in `src/luem/layout.py` is the single source of truth; never duplicate the table elsewhere.
+- Every model exposes `predict(text: str) -> float` = P(typed in the wrong layout), so eval and demo can swap models.
+- Problem is binary: the script of the typed text reveals the active layout, so the model only decides ok vs wrong.
+- `data/` and `models/` are regenerable and not committed. Never put personal shell history or keystroke logs into committed data.
+
+## Environment
+- Dev/demo: notebook, Linux Mint 22.3 Cinnamon 6.6.9, target session **Wayland** (X11 as fallback), layouts `us,th,us`, IBus running. Latency is measured here (CPU).
+- Demo reads keys via evdev and injects via uinput (no X11 APIs), so it runs on both Wayland and X11. evdev gives keycodes, not characters: the daemon must track the active layout itself. Spike result (X11): `gsettings org.cinnamon.desktop.input-sources current` neither follows nor controls the real layout; injecting Super+Space via uinput does switch it. So: switch by injecting Super+Space, track state by counting Super+Space presses.
+- Training: separate **Windows** PC with RTX 3070 (8 GB). Neural training scripts must run on both CPU and CUDA, on Windows and Linux: always `open(..., encoding="utf-8")`, use `pathlib`, guard entry points with `if __name__ == "__main__":`. Models move to the notebook as ONNX.

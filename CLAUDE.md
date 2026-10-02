@@ -1,6 +1,8 @@
 # CLAUDE.md
 
-Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedmanee <-> US QWERTY) and fix it on Linux. Deadline 2026-10-08. Plan and daily checklist: IMPLEMENTATION_PLAN.md (Thai).
+Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedmanee <-> US QWERTY) and fix it on Linux. Deadline 2026-10-08. Plan and daily checklist: docs/IMPLEMENTATION_PLAN.md (Thai). Flow diagrams: docs/FLOW.md. Report figure checklist: docs/FIGURES.md. Work log with rationale and problems: WORKLOG.md. Glossary: docs/GLOSSARY.md.
+
+Docs (README, WORKLOG, docs/*) are Thai and must be readable by a non-technical reader: explain terms on first use or link docs/GLOSSARY.md, use concrete examples, put technical detail inside `<details>` blocks. This file (CLAUDE.md) stays technical English.
 
 ## Commands
 - `uv sync` (dev), `uv sync --extra data --extra ml` (dataset/training phase), `--extra demo` for the evdev/uinput daemon
@@ -11,6 +13,8 @@ Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedma
 - Layout mapping in `src/luem/layout.py` is the single source of truth; never duplicate the table elsewhere.
 - Every model exposes `predict(text: str) -> float` = P(typed in the wrong layout), so eval and demo can swap models.
 - Problem is binary: the script of the typed text reveals the active layout, so the model only decides ok vs wrong.
+- Main neural model is a char-CNN (GRU optional, for comparison). Dataset stores full segments, not prefixes: the CNN DataLoader samples a random prefix each epoch; `evaluate.py` expands prefixes 1..n itself.
+- Detection runs at two moments with the same model: while typing (`τ_type`, high, after `k_min` chars) and on Space (`τ_space`, lower, full word). On-Space correction must also delete and retype the Space, since the daemon reads keys passively.
 - `data/` and `models/` are regenerable and not committed. Never put personal shell history or keystroke logs into committed data.
 
 ## Environment

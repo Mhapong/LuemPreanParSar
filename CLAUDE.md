@@ -2,6 +2,8 @@
 
 Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedmanee <-> US QWERTY) and fix it on Linux. Deadline 2026-10-08. Plan and daily checklist: docs/IMPLEMENTATION_PLAN.md (Thai). Flow diagrams: docs/FLOW.md. Report figure checklist: docs/FIGURES.md. Work log with rationale and problems: docs/WORKLOG.md. Glossary: docs/GLOSSARY.md.
 
+Always reply to the user in Thai (code, commands and technical terms stay English).
+
 Docs (README.md, docs/*) are Thai and must be readable by a non-technical reader: explain terms on first use or link docs/GLOSSARY.md, use concrete examples, put technical detail inside `<details>` blocks. This file (CLAUDE.md) stays technical English.
 
 ## Commands
@@ -22,4 +24,4 @@ Docs (README.md, docs/*) are Thai and must be readable by a non-technical reader
 ## Environment
 - Dev/demo: notebook, Linux Mint 22.3 Cinnamon 6.6.9, target session **Wayland** (X11 as fallback), layouts `us,th,us`, IBus running. Latency is measured here (CPU).
 - Demo reads keys via evdev and injects via uinput (no X11 APIs), so it runs on both Wayland and X11. evdev gives keycodes, not characters: the daemon must track the active layout itself. Spike result (X11): `gsettings org.cinnamon.desktop.input-sources current` neither follows nor controls the real layout; injecting Super+Space via uinput does switch it. So: switch by injecting Super+Space, track state by counting Super+Space presses.
-- Training: separate **Windows** PC with RTX 3070 (8 GB). Neural training scripts must run on both CPU and CUDA, on Windows and Linux: always `open(..., encoding="utf-8")`, use `pathlib`, guard entry points with `if __name__ == "__main__":`. Models move to the notebook as ONNX.
+- Training: separate **Windows** PC with RTX 3070 (8 GB), setup steps in docs/PC_SETUP.md. `pyproject.toml` routes torch to the cu128 index on Windows and the CPU index on Linux; Python pinned by `.python-version`. Neural training scripts must run on both CPU and CUDA, on Windows and Linux: always `open(..., encoding="utf-8")`, use `pathlib`, guard entry points with `if __name__ == "__main__":`. Models move to the notebook as ONNX. `scripts/train_cnn.py` must expose `--batch-size` and `--workers` (0 = no DataLoader subprocesses); docs/PC_SETUP.md already refers to both. Plan: whitelist small `models/*.onnx` in .gitignore so trained models travel via git.

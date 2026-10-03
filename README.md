@@ -30,6 +30,7 @@
 | ดูแผนภาพการทำงาน | [docs/FLOW.md](docs/FLOW.md) |
 | รู้ว่าทำอะไรไปแล้ว เจอปัญหาอะไร และแก้ยังไง | [docs/WORKLOG.md](docs/WORKLOG.md) |
 | เตรียมรูปสำหรับรายงาน | [docs/FIGURES.md](docs/FIGURES.md) |
+| เตรียม PC Windows สำหรับฝึก AI | [docs/PC_SETUP.md](docs/PC_SETUP.md) |
 
 **แนะนำลำดับการอ่าน:** README นี้ → FLOW.md (ดูภาพรวม) → IMPLEMENTATION_PLAN.md
 

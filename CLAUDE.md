@@ -1,13 +1,15 @@
 # CLAUDE.md
 
-Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedmanee <-> US QWERTY) and fix it on Linux. Deadline 2026-10-08. Plan and daily checklist: docs/IMPLEMENTATION_PLAN.md (Thai). Flow diagrams: docs/FLOW.md. Report figure checklist: docs/FIGURES.md. Work log with rationale and problems: WORKLOG.md. Glossary: docs/GLOSSARY.md.
+Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedmanee <-> US QWERTY) and fix it on Linux. Deadline 2026-10-08. Plan and daily checklist: docs/IMPLEMENTATION_PLAN.md (Thai). Flow diagrams: docs/FLOW.md. Report figure checklist: docs/FIGURES.md. Work log with rationale and problems: docs/WORKLOG.md. Glossary: docs/GLOSSARY.md.
 
-Docs (README, WORKLOG, docs/*) are Thai and must be readable by a non-technical reader: explain terms on first use or link docs/GLOSSARY.md, use concrete examples, put technical detail inside `<details>` blocks. This file (CLAUDE.md) stays technical English.
+Docs (README.md, docs/*) are Thai and must be readable by a non-technical reader: explain terms on first use or link docs/GLOSSARY.md, use concrete examples, put technical detail inside `<details>` blocks. This file (CLAUDE.md) stays technical English.
 
 ## Commands
 - `uv sync` (dev), `uv sync --extra data --extra ml` (dataset/training phase), `--extra demo` for the evdev/uinput daemon
 - `uv run pytest` runs tests and doctests in `src/`
 - `uv run python scripts/verify_layout.py` checks `src/luem/layout.py` against `/usr/share/X11/xkb/symbols/th`
+- Pipeline: `scripts/download_corpus.py` -> `scripts/build_dataset.py` -> `scripts/train_baselines.py` -> `eval/evaluate.py --model ngram` (thresholds chosen on val, reported on test; `--limit 30000` default)
+- Models live in `src/luem/models/` and are loaded by name via `luem.models.load_model`; add new ones to `NAMES`.
 
 ## Conventions
 - Layout mapping in `src/luem/layout.py` is the single source of truth; never duplicate the table elsewhere.

@@ -47,6 +47,17 @@ class Sample:
         return asdict(self)
 
 
+def read_samples(path, limit: int = 0, seed: int = 0) -> list[dict]:
+    """Load a split written by scripts/build_dataset.py; limit>0 takes a fixed random subset."""
+    import json
+
+    with open(path, encoding="utf-8") as f:
+        rows = [json.loads(line) for line in f]
+    if limit and limit < len(rows):
+        rows = random.Random(seed).sample(rows, limit)
+    return rows
+
+
 def split_of(doc_id: str) -> str:
     """Stable 80/10/10 split by document, identical on every machine (unlike hash())."""
     bucket = int(hashlib.md5(doc_id.encode("utf-8")).hexdigest(), 16) % 100

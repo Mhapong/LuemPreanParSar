@@ -28,7 +28,7 @@
 | เข้าใจคำศัพท์ที่ไม่รู้จัก | [docs/GLOSSARY.md](docs/GLOSSARY.md) |
 | รู้ว่าจะทำอะไรบ้าง วันไหน และทำไม | [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) |
 | ดูแผนภาพการทำงาน | [docs/FLOW.md](docs/FLOW.md) |
-| รู้ว่าทำอะไรไปแล้ว เจอปัญหาอะไร และแก้ยังไง | [WORKLOG.md](WORKLOG.md) |
+| รู้ว่าทำอะไรไปแล้ว เจอปัญหาอะไร และแก้ยังไง | [docs/WORKLOG.md](docs/WORKLOG.md) |
 | เตรียมรูปสำหรับรายงาน | [docs/FIGURES.md](docs/FIGURES.md) |
 
 **แนะนำลำดับการอ่าน:** README นี้ → FLOW.md (ดูภาพรวม) → IMPLEMENTATION_PLAN.md

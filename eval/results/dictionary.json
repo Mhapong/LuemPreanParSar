@@ -1,0 +1,525 @@
+{
+  "model": "dictionary",
+  "target_precision": 0.99,
+  "test": {
+    "thresholds": {
+      "k_min": 6,
+      "tau_type": 0.9299999999999999,
+      "tau_space": 2.0
+    },
+    "n": 30000,
+    "n_wrong": 14263,
+    "precision": 0.98819,
+    "recall": 0.31094,
+    "f1": 0.47304,
+    "recall_while_typing": 0.31094,
+    "recall_on_space": 0.0,
+    "false_fix_rate": 0.003368,
+    "false_fix_rate_hard_negatives": 0.005642,
+    "recall_meant_thai": 0.44592,
+    "recall_meant_english": 0.16892,
+    "precision_at_base_rate": {
+      "0.02": 0.65329,
+      "0.05": 0.82933,
+      "0.1": 0.91118
+    },
+    "chars_to_detect": {
+      "median": 6.0,
+      "mean": 7.773,
+      "caught_by_3_chars": 0.0,
+      "caught_by_5_chars": 0.0,
+      "cdf": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.20374,
+        0.22604,
+        0.24539,
+        0.25605,
+        0.2707,
+        0.28073,
+        0.28718,
+        0.29117,
+        0.29314,
+        0.29489,
+        0.29608,
+        0.29727,
+        0.29889,
+        0.30127,
+        0.30344,
+        0.30506,
+        0.30625,
+        0.30639,
+        0.30667,
+        0.30709,
+        0.30744,
+        0.30856,
+        0.30919,
+        0.30982,
+        0.31024,
+        0.31066,
+        0.31094
+      ]
+    },
+    "average_precision_full_text": 0.94418,
+    "pr_curve_full_text": [
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.021739,
+        "precision": 0.55962,
+        "recall": 0.99762
+      },
+      {
+        "tau": 0.05,
+        "precision": 0.57037,
+        "recall": 0.99762
+      },
+      {
+        "tau": 0.068182,
+        "precision": 0.58239,
+        "recall": 0.99741
+      },
+      {
+        "tau": 0.083333,
+        "precision": 0.59117,
+        "recall": 0.9972
+      },
+      {
+        "tau": 0.1,
+        "precision": 0.60452,
+        "recall": 0.99656
+      },
+      {
+        "tau": 0.113636,
+        "precision": 0.6207,
+        "recall": 0.99586
+      },
+      {
+        "tau": 0.125,
+        "precision": 0.62527,
+        "recall": 0.99579
+      },
+      {
+        "tau": 0.142857,
+        "precision": 0.64255,
+        "recall": 0.99502
+      },
+      {
+        "tau": 0.166667,
+        "precision": 0.65904,
+        "recall": 0.99404
+      },
+      {
+        "tau": 0.181818,
+        "precision": 0.67766,
+        "recall": 0.99152
+      },
+      {
+        "tau": 0.2,
+        "precision": 0.68653,
+        "recall": 0.99089
+      },
+      {
+        "tau": 0.222222,
+        "precision": 0.70863,
+        "recall": 0.98815
+      },
+      {
+        "tau": 0.25,
+        "precision": 0.71708,
+        "recall": 0.98696
+      },
+      {
+        "tau": 0.277778,
+        "precision": 0.74341,
+        "recall": 0.98233
+      },
+      {
+        "tau": 0.3125,
+        "precision": 0.75901,
+        "recall": 0.97644
+      },
+      {
+        "tau": 0.357143,
+        "precision": 0.77425,
+        "recall": 0.96691
+      },
+      {
+        "tau": 0.4,
+        "precision": 0.78275,
+        "recall": 0.95639
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.5,
+        "precision": 0.79525,
+        "recall": 0.94167
+      },
+      {
+        "tau": 0.6,
+        "precision": 0.92966,
+        "recall": 0.76814
+      },
+      {
+        "tau": 0.65,
+        "precision": 0.95278,
+        "recall": 0.7483
+      },
+      {
+        "tau": 0.7,
+        "precision": 0.96359,
+        "recall": 0.72362
+      },
+      {
+        "tau": 0.735294,
+        "precision": 0.97209,
+        "recall": 0.69347
+      },
+      {
+        "tau": 0.75,
+        "precision": 0.97235,
+        "recall": 0.69025
+      },
+      {
+        "tau": 0.785714,
+        "precision": 0.97786,
+        "recall": 0.6317
+      },
+      {
+        "tau": 0.8,
+        "precision": 0.97934,
+        "recall": 0.6181
+      },
+      {
+        "tau": 0.833333,
+        "precision": 0.9827,
+        "recall": 0.56138
+      },
+      {
+        "tau": 0.833333,
+        "precision": 0.98606,
+        "recall": 0.56033
+      },
+      {
+        "tau": 0.857143,
+        "precision": 0.9852,
+        "recall": 0.5041
+      },
+      {
+        "tau": 0.875,
+        "precision": 0.9857,
+        "recall": 0.46891
+      },
+      {
+        "tau": 0.888889,
+        "precision": 0.98755,
+        "recall": 0.42838
+      },
+      {
+        "tau": 0.9,
+        "precision": 0.98738,
+        "recall": 0.40595
+      },
+      {
+        "tau": 0.916667,
+        "precision": 0.98688,
+        "recall": 0.36388
+      },
+      {
+        "tau": 0.9375,
+        "precision": 0.98763,
+        "recall": 0.31915
+      },
+      {
+        "tau": 0.958333,
+        "precision": 0.98632,
+        "recall": 0.28318
+      },
+      {
+        "tau": 1.0,
+        "precision": 0.98456,
+        "recall": 0.25037
+      },
+      {
+        "tau": 1.0,
+        "precision": 0.98456,
+        "recall": 0.25037
+      },
+      {
+        "tau": 1.0,
+        "precision": 0.98456,
+        "recall": 0.25037
+      },
+      {
+        "tau": 1.0,
+        "precision": 0.98456,
+        "recall": 0.25037
+      },
+      {
+        "tau": 1.0,
+        "precision": 0.98456,
+        "recall": 0.25037
+      },
+      {
+        "tau": 1.0,
+        "precision": 0.98456,
+        "recall": 0.25037
+      },
+      {
+        "tau": 1.0,
+        "precision": 0.98456,
+        "recall": 0.25037
+      },
+      {
+        "tau": 1.0,
+        "precision": 0.98456,
+        "recall": 0.25037
+      }
+    ]
+  },
+  "val": {
+    "thresholds": {
+      "k_min": 6,
+      "tau_type": 0.9299999999999999,
+      "tau_space": 2.0
+    },
+    "n": 30000,
+    "n_wrong": 14089,
+    "precision": 0.99009,
+    "recall": 0.31202,
+    "f1": 0.4745,
+    "recall_while_typing": 0.31202,
+    "recall_on_space": 0.0,
+    "false_fix_rate": 0.002765,
+    "false_fix_rate_hard_negatives": 0.006098,
+    "recall_meant_thai": 0.44727,
+    "recall_meant_english": 0.16256,
+    "precision_at_base_rate": {
+      "0.02": 0.69721,
+      "0.05": 0.85587,
+      "0.1": 0.92613
+    },
+    "chars_to_detect": {
+      "median": 6.0,
+      "mean": 7.879,
+      "caught_by_3_chars": 0.0,
+      "caught_by_5_chars": 0.0,
+      "cdf": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.20009,
+        0.22003,
+        0.2409,
+        0.25197,
+        0.269,
+        0.27972,
+        0.28696,
+        0.29172,
+        0.2937,
+        0.2947,
+        0.29562,
+        0.29711,
+        0.29967,
+        0.30251,
+        0.30463,
+        0.30563,
+        0.30712,
+        0.30762,
+        0.30804,
+        0.30847,
+        0.30889,
+        0.30932,
+        0.30967,
+        0.31024,
+        0.31124,
+        0.31159,
+        0.31202
+      ]
+    },
+    "average_precision_full_text": 0.94806
+  },
+  "latency_us": {
+    "mean": 35.8,
+    "p50": 28.4,
+    "p99": 89.2
+  },
+  "errors": {
+    "false_fix": [
+      "สแวงก์",
+      "vestri.go.th",
+      "ตู้วหู้วววววววววววววววว",
+      "slowpoke",
+      "lustre)",
+      "wardrobe",
+      "deltree.txt",
+      "คลาร์ก",
+      "irritation147@gmail.com",
+      "striata",
+      "\"นตฺถิ",
+      "restructuring",
+      "เคานต์แห่งบลัวส์,",
+      "เฟซ-...",
+      "พิลล์แมน",
+      "Eredivisie",
+      "ลอว์เลอร์",
+      "คณฺฐาภรโณ)",
+      "รวจหรือโรงบาลก็ได้ฟรี",
+      "ลอว์เลอร์",
+      "เคานต์เฟลิกซ์แห่งมงเปอซา",
+      "rideau_virchow",
+      "voxels",
+      "despatched",
+      "Drummond",
+      "ซึซึอิ",
+      "lullaby",
+      "เลแวนต์",
+      "videogameYcp",
+      "micrometres)",
+      "เหลียงเสี่ยวปิงพลาดทำหมวกหล่นพื้",
+      "grille,",
+      "woodwind_coverage",
+      "Toriumi's",
+      "ฮิวจ์ส",
+      "suverene",
+      "ทิลมันน์-ดิ๊ก",
+      "ephemeris)",
+      "subsurface",
+      "สเมอร์นอฟ"
+    ],
+    "missed": [
+      "ำปรหะรืเ <- existing",
+      "g,nv'vblit <- เมืองอิสระ",
+      "พำฟกรืเ <- reading",
+      ",k;kiN <- มาวาร์",
+      "s,kp57' <- หมายถึง",
+      "xkF: <- ปาโซ",
+      "r\"L\" <- พ.ศ.",
+      "ธนพ <- Tor",
+      "ฮฆ <- VS",
+      "งยนสระรแฟส <- 'political",
+      "c9j:njvly9pN <- แต่ซื่อสัตย์",
+      "Fig:jiydg8o,kd <- โรเซ่รักเคนมาก",
+      "ฆำพรำห <- Series",
+      "ฤทนืเ <- Among",
+      "ีืรอำพหระัใ <- university.",
+      "รกา <- idk",
+      "z^hl,y8i8^jc-j' <- ผู้สมัครคู่แข่ง",
+      "ไฟห <- was",
+      "g,Kkpo <- เมษายน",
+      "๊หำ <- Use",
+      "Fi'ci,8voikf <- โรงแรมคอนราด",
+      "ช๘นทๅึๅคฟ <- =_om1718a",
+      "ฺศฎ์ฏ <- BLEND",
+      "ฆยำืแำพ <- Spencer",
+      "นยำื <- open",
+      "r\"L\" <- พ.ศ.",
+      "it[[g8,uvo6di,;bTkogxHoit[[[^iIk <- ระบบเคมีอนุกรมวิธานเป็นระบบบูรณา",
+      "TyPPjk3TyPPkgiL <- ธัญญ่า-ธัญญาเรศ",
+      "]bo6d:N <- ลินุกซ์",
+      "\"ำพดะ <- Werft",
+      "0vsNo <- จอห์น",
+      "ouh <- นี้",
+      "c]tik';y]c[a9k <- และรางวัลแบฟตา",
+      "ฺฟะรหะฟ <- Batista",
+      "c]t4kKkFxicdi, <- และภาษาโปรแกรม",
+      "=k[^q <- ชาบูๆ",
+      "cs]j'-hv,^]vnjo <- แหล่งข้อมูลอื่น",
+      ",kiN9bgo: <- มาร์ติเนซ",
+      "๖ไฟะำพ <- (water",
+      ",b56okpo <- มิถุนายน"
+    ]
+  }
+}

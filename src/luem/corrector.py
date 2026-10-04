@@ -42,6 +42,38 @@ LAYOUT_KEYS = {KEY_1: "en", KEY_2: "th"}
 
 Key = tuple[int, bool]  # (keycode, shift)
 
+# Thai vowels and tone marks that must follow a consonant (U+0E30..U+0E4E minus the leading vowels
+# เ แ โ ใ ไ, the repetition mark ๆ and the baht sign ฿, which can stand without one).
+_THAI_DEPENDENT = frozenset(map(chr, range(0x0E30, 0x0E4F))) - set("เแโใไๆ฿")
+
+
+def impossible_thai(word: str, at_start: bool = True) -> bool:
+    """Thai no writer types: dependent vowels/tone marks where no consonant carries them.
+
+    Every Thai syllable has a consonant, and marks like ี ้ ะ ำ attach to one. The models abstain on
+    text without a Thai consonant ("no letter yet"), yet that is exactly what common English words
+    look like when typed with the Thai layout: "the" -> ะ้ำ, "he" -> ้ำ, "u" -> ี.
+
+    at_start: the word really starts here (after a Space/Enter/Tab we saw), so one such mark before
+    the first consonant is enough. Otherwise (after a click) the cursor may sit right after a
+    consonant, where marks are fine, so require 3 different marks in a row: real Thai has such runs
+    only in stretched words (ม่าาา, repeated า) and the old spelling น + ํ้า (716 in 61M characters).
+
+    >>> [impossible_thai(w) for w in ("ะ้ำ", "ี", "ไำ", "เ", "ๆ", "เขา", "สวัสดี")]
+    [True, True, True, False, False, False, False]
+    >>> [impossible_thai(w, at_start=False) for w in ("ะ้ำ", "ี", "่าาา", "ํ้า")]
+    [True, False, False, False]
+    """
+    marks = []
+    for ch in word:
+        if "ก" <= ch <= "ฮ":
+            break
+        if ch in _THAI_DEPENDENT:
+            marks.append(ch)
+    if at_start:
+        return bool(marks)
+    return len(marks) >= 3 and len(set(marks)) == len(marks) and "ํ" not in marks
+
 
 class Injector(Protocol):
     def backspace(self, n: int) -> None: ...
@@ -91,6 +123,8 @@ class Corrector:
     last_word: list[Key] | None = None              # word before the last Space (for manual fix)
     last_fixed: bool = False
     pending: tuple[str, str, float | None] | None = None  # ("word"|"last", why, p): run at flush()
+    at_start: bool = False     # the word began right after a Space/Enter/Tab we saw (not after a click)
+    last_start: bool = False
     held: set[int] = field(default_factory=set)
     log: list[Event] = field(default_factory=list)
 
@@ -111,6 +145,8 @@ class Corrector:
             return
         shift = bool(self.held & SHIFTS)
         meta, alt, ctrl = bool(self.held & METAS), bool(self.held & ALTS), bool(self.held & CTRLS)
+        if value == 2 and (meta or alt or ctrl):
+            return  # a held shortcut repeats; counting each repeat as a Super+Space toggle drifted the layout
 
         if meta and alt and code in LAYOUT_KEYS:          # user selects a layout directly
             self.layout = LAYOUT_KEYS[code]
@@ -125,6 +161,7 @@ class Corrector:
             self._reset(f"user toggled to {self.layout}", forget_last=True)
         elif ctrl or alt or meta:                         # any other shortcut: cursor/text may change
             self._reset("shortcut")
+            self.at_start = False
         elif code == KEY_BACKSPACE:
             self._backspace()
         elif code == KEY_SPACE:
@@ -133,10 +170,19 @@ class Corrector:
             self._letter(code, shift)
         else:                                             # Enter, Tab, arrows, numpad, F-keys, ...
             self._reset("non-text key", forget_last=True)
+            self.at_start = code in (KEY_ENTER, KEY_KPENTER, KEY_TAB)  # a new line/field starts a word
+
+    def on_layout(self, layout: str) -> None:
+        """The desktop reported its real layout (Cinnamon D-Bus). Trust it over our own counting."""
+        if layout != self.layout:
+            self.layout = layout
+            self._reset(f"desktop switched to {layout}", forget_last=True)
+            self._emit("layout", f"desktop says {layout}")
 
     def on_click(self) -> None:
         """Mouse click: the cursor may now be somewhere else, deleting would hit the wrong text."""
         self._reset("mouse click", forget_last=True)
+        self.at_start = False
 
     # ------------------------------------------------------------------ typing
 
@@ -152,8 +198,7 @@ class Corrector:
                 or len(self.keys) < self.th.k_min or len(self.keys) > MAX_LEN):
             return
         text = render(self.keys, self.layout)
-        p = self.model.predict(text)
-        self._emit("score", text, p)
+        p = self._score(text)
         if p >= self.th.tau_type:
             self.pending = ("word", "while typing", p)
 
@@ -163,14 +208,12 @@ class Corrector:
         elif self.pending:                                # second Space before the fix ran
             self._drop_pending("kept typing")
         elif self.keys and self.enabled and not self.fixed and len(self.keys) <= MAX_LEN:
-            text = render(self.keys, self.layout)
-            p = self.model.predict(text)
-            self._emit("score", text + "␣", p)
+            p = self._score(render(self.keys, self.layout), "␣")
             if p >= self.th.tau_space:
                 # the app already received this Space: the fix deletes it too and types it again
                 self.pending = ("last", "on Space", p)
-        self.last_word, self.last_fixed = (self.keys or None), self.fixed
-        self.keys, self.fixed = [], False
+        self.last_word, self.last_fixed, self.last_start = (self.keys or None), self.fixed, self.at_start
+        self.keys, self.fixed, self.at_start = [], False, True
 
     def _backspace(self) -> None:
         if self.pending:
@@ -180,8 +223,17 @@ class Corrector:
             if not self.keys:
                 self.fixed = False
         elif self.last_word:  # deleted the Space: we are back inside the previous word
-            self.keys, self.fixed = self.last_word, self.last_fixed
+            self.keys, self.fixed, self.at_start = self.last_word, self.last_fixed, self.last_start
             self.last_word = None
+
+    def _score(self, text: str, suffix: str = "") -> float:
+        """P(wrong layout) for the word on screen: Thai spelling rule first, then the model."""
+        if self.layout == "th" and impossible_thai(text, self.at_start):
+            p, why = 1.0, "  (Thai word can't start like this)"
+        else:
+            p, why = self.model.predict(text), ""
+        self._emit("score", text + suffix + why, p)
+        return p
 
     def _manual_fix(self) -> None:
         """Convert the word being typed, or the one just finished. Converting twice undoes it."""
@@ -225,6 +277,8 @@ class Corrector:
     def _reset(self, why: str, forget_last: bool = False) -> None:
         if self.keys or self.pending or (forget_last and self.last_word):
             self._emit("reset", why)
+        if self.keys:            # what follows continues a word already on screen
+            self.at_start = False
         self.keys, self.fixed, self.pending = [], False, None
         if forget_last:
             self.last_word = None

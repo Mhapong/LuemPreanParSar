@@ -1,0 +1,125 @@
+{
+  "config": {
+    "emb": 32,
+    "channels": 128,
+    "kernels": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "hidden": 96,
+    "dropout": 0.1
+  },
+  "n_params": 162081,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.10039799124557117,
+      "loss_full": 0.01221,
+      "loss_prefix": 0.075104,
+      "ap_full": 0.999852,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 39.4
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.04971883497511652,
+      "loss_full": 0.010499,
+      "loss_prefix": 0.071821,
+      "ap_full": 0.999897,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 43.7
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.04524395653069503,
+      "loss_full": 0.008725,
+      "loss_prefix": 0.068336,
+      "ap_full": 0.999915,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 61.6
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.04341275852287858,
+      "loss_full": 0.007499,
+      "loss_prefix": 0.067808,
+      "ap_full": 0.999938,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 57.6
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.0416176780971343,
+      "loss_full": 0.006585,
+      "loss_prefix": 0.065335,
+      "ap_full": 0.999943,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 59.6
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.04067013252767426,
+      "loss_full": 0.007061,
+      "loss_prefix": 0.064591,
+      "ap_full": 0.999928,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 56.2
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.039912455652952046,
+      "loss_full": 0.006695,
+      "loss_prefix": 0.063558,
+      "ap_full": 0.999943,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 59.5
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.038713023715492824,
+      "loss_full": 0.006328,
+      "loss_prefix": 0.063155,
+      "ap_full": 0.999938,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 65.4
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.03792810052309798,
+      "loss_full": 0.00788,
+      "loss_prefix": 0.0644,
+      "ap_full": 0.999942,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 53.5
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.03703002932769855,
+      "loss_full": 0.007806,
+      "loss_prefix": 0.063723,
+      "ap_full": 0.999942,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 67.5
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.0365317488457428,
+      "loss_full": 0.007525,
+      "loss_prefix": 0.06348,
+      "ap_full": 0.999946,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 41.5
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.03698789042672376,
+      "loss_full": 0.007528,
+      "loss_prefix": 0.063448,
+      "ap_full": 0.999946,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 36.2
+    }
+  ]
+}

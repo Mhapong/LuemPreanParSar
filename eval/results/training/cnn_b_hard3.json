@@ -1,0 +1,107 @@
+{
+  "config": {
+    "emb": 32,
+    "channels": 96,
+    "kernels": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "hidden": 128,
+    "dropout": 0.1
+  },
+  "n_params": 147681,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.10326336639887242,
+      "loss_full": 0.015519,
+      "loss_prefix": 0.079863,
+      "ap_full": 0.999798,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 93.2
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.05014184871388056,
+      "loss_full": 0.009374,
+      "loss_prefix": 0.072333,
+      "ap_full": 0.999919,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 73.3
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.04525825301176563,
+      "loss_full": 0.008994,
+      "loss_prefix": 0.069258,
+      "ap_full": 0.999916,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 78.1
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.04336399422998321,
+      "loss_full": 0.009511,
+      "loss_prefix": 0.071528,
+      "ap_full": 0.999904,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 78.4
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.041714611076622984,
+      "loss_full": 0.006803,
+      "loss_prefix": 0.065242,
+      "ap_full": 0.999947,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 65.4
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.04017446694640436,
+      "loss_full": 0.006656,
+      "loss_prefix": 0.065059,
+      "ap_full": 0.999952,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 55.0
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.03889271206805215,
+      "loss_full": 0.006469,
+      "loss_prefix": 0.063955,
+      "ap_full": 0.999952,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 57.2
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.037963450779817005,
+      "loss_full": 0.005889,
+      "loss_prefix": 0.063269,
+      "ap_full": 0.999958,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 62.4
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.03687278703604369,
+      "loss_full": 0.006114,
+      "loss_prefix": 0.062947,
+      "ap_full": 0.999953,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 77.8
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.036595271398575824,
+      "loss_full": 0.006182,
+      "loss_prefix": 0.062901,
+      "ap_full": 0.999952,
+      "hardneg_fp_at_r95": 0.0,
+      "seconds": 70.2
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "machine": {
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12500H",
+    "python": "3.14.7"
+  },
+  "budget_ms": 5.0,
+  "models": {
+    "dictionary": {
+      "load_s": 0.106,
+      "calls": 10929,
+      "mean_ms": 0.0139,
+      "p50_ms": 0.0119,
+      "p99_ms": 0.0346,
+      "max_ms": 0.0562,
+      "under_budget": true
+    },
+    "ngram": {
+      "load_s": 0.675,
+      "calls": 10929,
+      "mean_ms": 0.0339,
+      "p50_ms": 0.025,
+      "p99_ms": 0.109,
+      "max_ms": 0.2441,
+      "under_budget": true
+    },
+    "cnn": {
+      "load_s": 0.289,
+      "calls": 10929,
+      "mean_ms": 0.0435,
+      "p50_ms": 0.0415,
+      "p99_ms": 0.0647,
+      "max_ms": 0.1112,
+      "under_budget": true
+    },
+    "gru": {
+      "load_s": 0.004,
+      "calls": 10929,
+      "mean_ms": 0.0486,
+      "p50_ms": 0.0407,
+      "p99_ms": 0.1175,
+      "max_ms": 0.1981,
+      "under_budget": true
+    }
+  }
+}

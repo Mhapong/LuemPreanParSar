@@ -110,6 +110,8 @@ def evaluate(rows: list[dict], prefix_scores: list[list[float]], th: Thresholds)
     return {
         "thresholds": asdict(th),
         "n": len(rows), "n_wrong": n_wrong,
+        "confusion": {"tp": int((fire & y).sum()), "fp": int((fire & ok).sum()),
+                      "fn": int((~fire & y).sum()), "tn": int((~fire & ok).sum())},
         "precision": round(prec, 5),
         "recall": round(rec, 5),
         "f1": round(2 * prec * rec / (prec + rec), 5) if prec + rec else 0.0,

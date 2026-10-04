@@ -1,0 +1,46 @@
+{
+  "machine": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+    "python": "3.14.6"
+  },
+  "budget_ms": 5.0,
+  "models": {
+    "dictionary": {
+      "load_s": 0.114,
+      "calls": 10929,
+      "mean_ms": 0.0133,
+      "p50_ms": 0.011,
+      "p99_ms": 0.0422,
+      "max_ms": 0.1774,
+      "under_budget": true
+    },
+    "ngram": {
+      "load_s": 0.624,
+      "calls": 10929,
+      "mean_ms": 0.0352,
+      "p50_ms": 0.0254,
+      "p99_ms": 0.1199,
+      "max_ms": 0.3901,
+      "under_budget": true
+    },
+    "cnn": {
+      "load_s": 0.12,
+      "calls": 10929,
+      "mean_ms": 0.0486,
+      "p50_ms": 0.0431,
+      "p99_ms": 0.1467,
+      "max_ms": 0.4014,
+      "under_budget": true
+    },
+    "gru": {
+      "load_s": 0.003,
+      "calls": 10929,
+      "mean_ms": 0.0482,
+      "p50_ms": 0.0405,
+      "p99_ms": 0.1512,
+      "max_ms": 0.6351,
+      "under_budget": true
+    }
+  }
+}

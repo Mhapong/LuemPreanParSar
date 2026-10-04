@@ -11,8 +11,12 @@ Hotkeys:  Super+Alt+F  convert the current / last word (press again to undo)
 
 How it works: reads key codes from /dev/input (evdev, below the display server, so Wayland does
 not block it), asks the model about the word being typed, and when it is in the wrong layout
-types BackSpace, selects the other layout with Super+Alt+1/2 and presses the same keys again
-through a virtual keyboard (uinput). Logic lives in src/luem/corrector.py.
+types BackSpace, selects the other layout and presses the same keys again through a virtual
+keyboard (uinput). Logic lives in src/luem/corrector.py.
+
+Key codes do not say which layout is active, so the daemon asks Cinnamon over D-Bus (works on
+X11 and Wayland) and follows its CurrentInputSourceChanged signal; layouts are also selected
+through D-Bus. Without Cinnamon it falls back to injecting Super+Alt+1/2 and counting Super+Space.
 
 Privacy: nothing typed is written to disk. With -v the current word is printed to this terminal.
 Needs read access to /dev/input/event* and /dev/uinput (group `input`, see docs/IMPLEMENTATION_PLAN.md).
@@ -20,6 +24,8 @@ Needs read access to /dev/input/event* and /dev/uinput (group `input`, see docs/
 
 import argparse
 import json
+import os
+import re
 import select
 import subprocess
 import sys
@@ -37,6 +43,9 @@ OWN_DEVICES = {UINPUT_NAME, "luem-spike", "luem-spike-layout"}
 KB_SCHEMA, SRC_SCHEMA = "org.cinnamon.desktop.keybindings.wm", "org.cinnamon.desktop.input-sources"
 SHORTCUTS = {"switch-input-source-0": "['<Super><Alt>1']", "switch-input-source-1": "['<Super><Alt>2']"}
 CLICKS = {e.BTN_LEFT, e.BTN_RIGHT, e.BTN_MIDDLE, e.BTN_TOUCH}  # BTN_TOUCH: touchpad tap/move
+CINNAMON = ["--session", "--dest", "org.Cinnamon", "--object-path", "/org/Cinnamon"]
+SOURCE_LAYOUT = {"us": "en", "th": "th"}  # Cinnamon input-source id -> our layout name
+LAYOUT_INDEX = {"en": 0, "th": 1}         # position in the sources list (checked by check_desktop)
 
 
 # ------------------------------------------------------------------ desktop checks
@@ -86,6 +95,50 @@ def load_thresholds(model: str, target: str, args) -> Thresholds:
     return th
 
 
+class CinnamonLayout:
+    """The real active layout, from Cinnamon's own state over D-Bus (not gsettings, which lies).
+
+    Counting Super+Space presses drifted (seen on the real desktop: screen showed "l;l;" while the
+    daemon thought Thai). Cinnamon knows the truth and signals every change, whoever made it.
+    """
+
+    def __init__(self):
+        self.proc = subprocess.Popen(["gdbus", "monitor", *CINNAMON], stdout=subprocess.PIPE)
+        self.fd = self.proc.stdout.fileno()
+        self.buf = ""
+
+    @staticmethod
+    def call(method: str, *args: str) -> str | None:
+        try:
+            return subprocess.run(["gdbus", "call", *CINNAMON, "--method", f"org.Cinnamon.{method}", *args],
+                                  capture_output=True, text=True, check=True, timeout=2).stdout
+        except (OSError, subprocess.SubprocessError):
+            return None
+
+    @classmethod
+    def current(cls) -> str | None:
+        """GetInputSources returns tuples (type, id, ..., is_current); pick the current one."""
+        out = cls.call("GetInputSources")
+        found = re.search(r"\('xkb', '(\w+)'[^()]*, true\)", out or "")
+        return SOURCE_LAYOUT.get(found.group(1)) if found else None
+
+    def select(self, layout: str) -> None:
+        self.call("ActivateInputSourceIndex", str(LAYOUT_INDEX[layout]))
+
+    def changes(self) -> list[str]:
+        """Layouts announced since the last call. Raw os.read: select() can't see Python-buffered lines."""
+        data = os.read(self.fd, 4096)
+        if not data:
+            raise EOFError("gdbus monitor exited")
+        self.buf += data.decode(errors="replace")
+        *lines, self.buf = self.buf.split("\n")
+        ids = re.findall(r"CurrentInputSourceChanged \('(\w+)',\)", "\n".join(lines))
+        return [SOURCE_LAYOUT[i] for i in ids if i in SOURCE_LAYOUT]
+
+    def close(self) -> None:
+        self.proc.terminate()
+
+
 # ------------------------------------------------------------------ devices
 
 def find_devices() -> tuple[list[InputDevice], list[InputDevice]]:
@@ -105,8 +158,8 @@ def find_devices() -> tuple[list[InputDevice], list[InputDevice]]:
 class UinputInjector:
     """Implements corrector.Injector with a virtual keyboard."""
 
-    def __init__(self, ui: UInput, key_delay: float, switch_delay: float):
-        self.ui, self.key_delay, self.switch_delay = ui, key_delay, switch_delay
+    def __init__(self, ui: UInput, key_delay: float, switch_delay: float, cinnamon: CinnamonLayout | None):
+        self.ui, self.key_delay, self.switch_delay, self.cinnamon = ui, key_delay, switch_delay, cinnamon
 
     def _tap(self, code: int, mods: tuple[int, ...] = ()) -> None:
         for m in mods:
@@ -123,7 +176,10 @@ class UinputInjector:
             self._tap(e.KEY_BACKSPACE)
 
     def select_layout(self, layout: str) -> None:
-        self._tap(KEY_1 if layout == "en" else KEY_2, (e.KEY_LEFTMETA, e.KEY_LEFTALT))
+        if self.cinnamon:
+            self.cinnamon.select(layout)
+        else:
+            self._tap(KEY_1 if layout == "en" else KEY_2, (e.KEY_LEFTMETA, e.KEY_LEFTALT))
         time.sleep(self.switch_delay)  # retyping before the switch lands would use the old layout
 
     def press_keys(self, keys) -> None:
@@ -231,20 +287,35 @@ def main() -> None:
     except PermissionError:
         raise SystemExit("cannot open /dev/uinput: add the udev rule from docs/IMPLEMENTATION_PLAN.md")
 
-    k = Corrector(model, UinputInjector(ui, args.key_delay, args.switch_delay), th, dry_run=args.dry_run)
+    real = CinnamonLayout.current()
+    cinnamon = CinnamonLayout() if real else None
+    print(f"active layout: {real} (followed via Cinnamon D-Bus)" if real else
+          "! cannot read the layout from Cinnamon D-Bus: guessing it by counting Super+Space")
+    k = Corrector(model, UinputInjector(ui, args.key_delay, args.switch_delay, cinnamon), th,
+                  dry_run=args.dry_run, layout=real or "en")
     devices = {d.fd: d for d in keyboards + pointers}
     kb_fds = {d.fd for d in keyboards}
     try:
         time.sleep(0.5)  # let the compositor register the virtual keyboard
-        if not args.dry_run:
+        if not args.dry_run and not cinnamon:
             k.start()
-        mode = "DRY RUN (no changes; assumes English is active, press Super+Alt+1 to be sure)" if args.dry_run \
-            else "fixing"
+        mode = "fixing" if not args.dry_run else "DRY RUN (no changes)" if cinnamon else \
+            "DRY RUN (no changes; assumes English is active, press Super+Alt+1 to be sure)"
         print(f"\nready, {mode}. Super+Alt+F convert word, Super+Alt+P pause, Ctrl+C quit\n")
         show(k.log, args.verbose)
         while True:
-            ready, _, _ = select.select(devices, [], [])
+            ready, _, _ = select.select([*devices, *([cinnamon.fd] if cinnamon else [])], [], [])
             for fd in ready:
+                if cinnamon and fd == cinnamon.fd:
+                    try:
+                        for layout in cinnamon.changes():
+                            k.on_layout(layout)
+                    except EOFError:
+                        print("! lost the Cinnamon D-Bus monitor: guessing the layout by counting Super+Space")
+                        cinnamon.close()
+                        cinnamon = k.injector.cinnamon = None
+                    show(k.log, args.verbose)
+                    continue
                 dev = devices[fd]
                 try:
                     events = list(dev.read())
@@ -271,6 +342,8 @@ def main() -> None:
         print("\nbye")
     finally:
         ui.close()
+        if cinnamon:
+            cinnamon.close()
 
 
 if __name__ == "__main__":

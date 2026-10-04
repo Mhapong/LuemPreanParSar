@@ -238,3 +238,68 @@ def test_backspace_cancels_pending_fix():
     press(d, k, c.KEY_BACKSPACE, flush=False)
     k.flush()
     assert d.ops == []
+
+
+# --- found on the real desktop: screen showed "l;l;" while the daemon thought Thai was active
+
+def test_desktop_reported_layout_wins_over_counting():
+    d, k = setup()
+    k.layout = "th"                             # our guess drifted
+    k.on_layout("en")                           # Cinnamon says what is really active
+    assert k.layout == "en"
+    type_meaning(d, k, "l;l;", "en")
+    assert [e.detail for e in k.log if e.kind == "score"][-1] == "l;l;"
+
+
+def test_held_shortcut_autorepeat_is_not_counted_again():
+    d, k = setup()
+    k.on_key(c.KEY_LEFTMETA, 1)
+    k.on_key(c.KEY_SPACE, 1)
+    for _ in range(5):
+        k.on_key(c.KEY_SPACE, 2)                # Super+Space held down
+    k.on_key(c.KEY_SPACE, 0)
+    k.on_key(c.KEY_LEFTMETA, 0)
+    assert k.layout == "th"
+    press(d, k, c.KEY_P, mods=SUPER_ALT)
+    for _ in range(3):
+        k.on_key(c.KEY_P, 2)
+    assert not k.enabled
+
+
+# --- found on the real desktop: "did u see" typed with th active; "u" (ี) was never fixed
+
+@pytest.mark.parametrize("word", ["u", "the", "he", "but"])
+def test_english_word_without_thai_consonant_is_fixed(word):
+    d, k = setup(desktop_layout="th")   # model abstains (0.0) on all of them
+    k.layout = "th"
+    type_meaning(d, k, "ดี ", "th")     # any earlier word: we saw a Space, so a new word starts
+    type_meaning(d, k, word, "en")
+    assert d.screen.endswith(" " + word) and d.layout == "en"
+
+
+def test_spelling_rule_not_used_after_click_into_a_word():
+    d, k = setup(desktop_layout="th")
+    k.layout = "th"
+    type_meaning(d, k, "ดี ", "th")
+    k.on_click()                        # cursor may now be right after a Thai consonant
+    type_meaning(d, k, "ี", "th")
+    assert d.ops == []
+
+
+def test_spelling_rule_not_used_mid_word_after_layout_toggle():
+    d, k = setup(desktop_layout="th")
+    k.layout = "th"
+    type_meaning(d, k, "x ", "en")
+    type_meaning(d, k, "ม", "th")
+    press(d, k, c.KEY_SPACE, mods=(c.KEY_LEFTMETA,))
+    press(d, k, c.KEY_SPACE, mods=(c.KEY_LEFTMETA,))   # toggled away and back: "ม" still on screen
+    type_meaning(d, k, "ี", "th")
+    assert d.ops == []
+
+
+def test_three_marks_in_a_row_fixed_even_after_click():
+    d, k = setup(desktop_layout="th")   # "the" typed right after clicking into a text box
+    k.layout = "th"
+    k.on_click()
+    type_meaning(d, k, "the", "en")
+    assert d.screen == "the" and d.layout == "en"

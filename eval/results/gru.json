@@ -1,515 +1,4831 @@
 {
   "model": "gru",
-  "target_precision": 0.99,
-  "test": {
-    "thresholds": {
-      "k_min": 2,
-      "tau_type": 0.9199999999999999,
-      "tau_space": 0.5
+  "file_bytes": 278850,
+  "n_val": 30000,
+  "n_test": 30000,
+  "test_average_precision_full_text": 0.99994,
+  "test_pr_curve_full_text": [
+    {
+      "tau": 0.0,
+      "precision": 0.47543,
+      "recall": 1.0
     },
-    "n": 30000,
-    "n_wrong": 14263,
-    "precision": 0.9915,
-    "recall": 0.9979,
-    "f1": 0.99469,
-    "recall_while_typing": 0.99404,
-    "recall_on_space": 0.00386,
-    "false_fix_rate": 0.007752,
-    "false_fix_rate_hard_negatives": 0.01763,
-    "recall_meant_thai": 0.99863,
-    "recall_meant_english": 0.99712,
-    "precision_at_base_rate": {
-      "0.02": 0.72429,
-      "0.05": 0.87138,
-      "0.1": 0.93465
+    {
+      "tau": 0.0,
+      "precision": 0.47543,
+      "recall": 1.0
     },
-    "chars_to_detect": {
-      "median": 2.0,
-      "mean": 2.324,
-      "caught_by_3_chars": 0.93788,
-      "caught_by_5_chars": 0.9892,
-      "cdf": [
-        0.0,
-        0.74809,
-        0.93788,
-        0.98128,
-        0.9892,
-        0.99243,
-        0.99341,
-        0.99383,
-        0.99397,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404,
-        0.99404
-      ]
+    {
+      "tau": 0.0,
+      "precision": 0.47543,
+      "recall": 1.0
     },
-    "average_precision_full_text": 0.99994,
-    "pr_curve_full_text": [
-      {
-        "tau": 0.0,
-        "precision": 0.47543,
-        "recall": 1.0
+    {
+      "tau": 0.0,
+      "precision": 0.49645,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.50729,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.50729,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.52654,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.52654,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.53986,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.55279,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.56291,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.58164,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.59516,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.60758,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0,
+      "precision": 0.61675,
+      "recall": 1.0
+    },
+    {
+      "tau": 1e-06,
+      "precision": 0.63408,
+      "recall": 1.0
+    },
+    {
+      "tau": 1e-06,
+      "precision": 0.64974,
+      "recall": 1.0
+    },
+    {
+      "tau": 1e-06,
+      "precision": 0.66696,
+      "recall": 1.0
+    },
+    {
+      "tau": 1e-06,
+      "precision": 0.68352,
+      "recall": 1.0
+    },
+    {
+      "tau": 1e-06,
+      "precision": 0.70116,
+      "recall": 1.0
+    },
+    {
+      "tau": 2e-06,
+      "precision": 0.7189,
+      "recall": 1.0
+    },
+    {
+      "tau": 3e-06,
+      "precision": 0.73817,
+      "recall": 1.0
+    },
+    {
+      "tau": 4e-06,
+      "precision": 0.75794,
+      "recall": 1.0
+    },
+    {
+      "tau": 7e-06,
+      "precision": 0.77876,
+      "recall": 1.0
+    },
+    {
+      "tau": 1.1e-05,
+      "precision": 0.80129,
+      "recall": 1.0
+    },
+    {
+      "tau": 2.2e-05,
+      "precision": 0.82459,
+      "recall": 1.0
+    },
+    {
+      "tau": 3.6e-05,
+      "precision": 0.85,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.000104,
+      "precision": 0.87659,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.0003,
+      "precision": 0.90238,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.000538,
+      "precision": 0.93503,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.001928,
+      "precision": 0.96725,
+      "recall": 1.0
+    },
+    {
+      "tau": 0.719387,
+      "precision": 0.99895,
+      "recall": 0.99727
+    },
+    {
+      "tau": 0.998259,
+      "precision": 0.99985,
+      "recall": 0.96284
+    },
+    {
+      "tau": 0.999457,
+      "precision": 0.99985,
+      "recall": 0.93417
+    },
+    {
+      "tau": 0.999704,
+      "precision": 0.99985,
+      "recall": 0.90871
+    },
+    {
+      "tau": 0.999907,
+      "precision": 0.99984,
+      "recall": 0.8616
+    },
+    {
+      "tau": 0.99994,
+      "precision": 0.99983,
+      "recall": 0.81981
+    },
+    {
+      "tau": 0.999975,
+      "precision": 0.99982,
+      "recall": 0.78882
+    },
+    {
+      "tau": 0.999988,
+      "precision": 1.0,
+      "recall": 0.74872
+    },
+    {
+      "tau": 0.999994,
+      "precision": 1.0,
+      "recall": 0.71331
+    },
+    {
+      "tau": 0.999996,
+      "precision": 1.0,
+      "recall": 0.67945
+    },
+    {
+      "tau": 0.999998,
+      "precision": 1.0,
+      "recall": 0.6418
+    },
+    {
+      "tau": 0.999998,
+      "precision": 1.0,
+      "recall": 0.61151
+    },
+    {
+      "tau": 0.999999,
+      "precision": 1.0,
+      "recall": 0.5766
+    },
+    {
+      "tau": 0.999999,
+      "precision": 1.0,
+      "recall": 0.53986
+    },
+    {
+      "tau": 0.999999,
+      "precision": 1.0,
+      "recall": 0.50186
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.47479
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.44444
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.39921
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.39921
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.34586
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.31824
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.31824
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.31824
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.20823
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.16266
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.16266
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.16266
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.16266
+    },
+    {
+      "tau": 1.0,
+      "precision": 1.0,
+      "recall": 0.16266
+    }
+  ],
+  "targets": {
+    "0.99": {
+      "test": {
+        "thresholds": {
+          "k_min": 2,
+          "tau_type": 0.9199999999999999,
+          "tau_space": 0.5
+        },
+        "n": 30000,
+        "n_wrong": 14263,
+        "confusion": {
+          "tp": 14233,
+          "fp": 122,
+          "fn": 30,
+          "tn": 15615
+        },
+        "precision": 0.9915,
+        "recall": 0.9979,
+        "f1": 0.99469,
+        "recall_while_typing": 0.99404,
+        "recall_on_space": 0.00386,
+        "false_fix_rate": 0.007752,
+        "false_fix_rate_hard_negatives": 0.01763,
+        "recall_meant_thai": 0.99863,
+        "recall_meant_english": 0.99712,
+        "precision_at_base_rate": {
+          "0.02": 0.72429,
+          "0.05": 0.87138,
+          "0.1": 0.93465
+        },
+        "chars_to_detect": {
+          "median": 2.0,
+          "mean": 2.324,
+          "caught_by_3_chars": 0.93788,
+          "caught_by_5_chars": 0.9892,
+          "cdf": [
+            0.0,
+            0.74809,
+            0.93788,
+            0.98128,
+            0.9892,
+            0.99243,
+            0.99341,
+            0.99383,
+            0.99397,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404,
+            0.99404
+          ]
+        }
       },
-      {
-        "tau": 0.0,
-        "precision": 0.47543,
-        "recall": 1.0
+      "val": {
+        "thresholds": {
+          "k_min": 2,
+          "tau_type": 0.9199999999999999,
+          "tau_space": 0.5
+        },
+        "n": 30000,
+        "n_wrong": 14089,
+        "confusion": {
+          "tp": 14068,
+          "fp": 140,
+          "fn": 21,
+          "tn": 15771
+        },
+        "precision": 0.99015,
+        "recall": 0.99851,
+        "f1": 0.99431,
+        "recall_while_typing": 0.99539,
+        "recall_on_space": 0.00312,
+        "false_fix_rate": 0.008799,
+        "false_fix_rate_hard_negatives": 0.020325,
+        "recall_meant_thai": 0.99919,
+        "recall_meant_english": 0.99776,
+        "precision_at_base_rate": {
+          "0.02": 0.69843,
+          "0.05": 0.85658,
+          "0.1": 0.92652
+        },
+        "chars_to_detect": {
+          "median": 2.0,
+          "mean": 2.318,
+          "caught_by_3_chars": 0.94251,
+          "caught_by_5_chars": 0.99084,
+          "cdf": [
+            0.0,
+            0.75094,
+            0.94251,
+            0.98375,
+            0.99084,
+            0.99404,
+            0.99524,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99532,
+            0.99539,
+            0.99539,
+            0.99539,
+            0.99539,
+            0.99539,
+            0.99539,
+            0.99539,
+            0.99539
+          ]
+        }
       },
-      {
-        "tau": 0.0,
-        "precision": 0.47543,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.49645,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.50729,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.50729,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.52654,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.52654,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.53986,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.55279,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.56291,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.58164,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.59516,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.60758,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0,
-        "precision": 0.61675,
-        "recall": 1.0
-      },
-      {
-        "tau": 1e-06,
-        "precision": 0.63408,
-        "recall": 1.0
-      },
-      {
-        "tau": 1e-06,
-        "precision": 0.64974,
-        "recall": 1.0
-      },
-      {
-        "tau": 1e-06,
-        "precision": 0.66696,
-        "recall": 1.0
-      },
-      {
-        "tau": 1e-06,
-        "precision": 0.68352,
-        "recall": 1.0
-      },
-      {
-        "tau": 1e-06,
-        "precision": 0.70116,
-        "recall": 1.0
-      },
-      {
-        "tau": 2e-06,
-        "precision": 0.7189,
-        "recall": 1.0
-      },
-      {
-        "tau": 3e-06,
-        "precision": 0.73817,
-        "recall": 1.0
-      },
-      {
-        "tau": 4e-06,
-        "precision": 0.75794,
-        "recall": 1.0
-      },
-      {
-        "tau": 7e-06,
-        "precision": 0.77876,
-        "recall": 1.0
-      },
-      {
-        "tau": 1.1e-05,
-        "precision": 0.80129,
-        "recall": 1.0
-      },
-      {
-        "tau": 2.2e-05,
-        "precision": 0.82459,
-        "recall": 1.0
-      },
-      {
-        "tau": 3.6e-05,
-        "precision": 0.85,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.000104,
-        "precision": 0.87659,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.0003,
-        "precision": 0.90238,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.000538,
-        "precision": 0.93503,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.001928,
-        "precision": 0.96725,
-        "recall": 1.0
-      },
-      {
-        "tau": 0.719387,
-        "precision": 0.99895,
-        "recall": 0.99727
-      },
-      {
-        "tau": 0.998259,
-        "precision": 0.99985,
-        "recall": 0.96284
-      },
-      {
-        "tau": 0.999457,
-        "precision": 0.99985,
-        "recall": 0.93417
-      },
-      {
-        "tau": 0.999704,
-        "precision": 0.99985,
-        "recall": 0.90871
-      },
-      {
-        "tau": 0.999907,
-        "precision": 0.99984,
-        "recall": 0.8616
-      },
-      {
-        "tau": 0.99994,
-        "precision": 0.99983,
-        "recall": 0.81981
-      },
-      {
-        "tau": 0.999975,
-        "precision": 0.99982,
-        "recall": 0.78882
-      },
-      {
-        "tau": 0.999988,
-        "precision": 1.0,
-        "recall": 0.74872
-      },
-      {
-        "tau": 0.999994,
-        "precision": 1.0,
-        "recall": 0.71331
-      },
-      {
-        "tau": 0.999996,
-        "precision": 1.0,
-        "recall": 0.67945
-      },
-      {
-        "tau": 0.999998,
-        "precision": 1.0,
-        "recall": 0.6418
-      },
-      {
-        "tau": 0.999998,
-        "precision": 1.0,
-        "recall": 0.61151
-      },
-      {
-        "tau": 0.999999,
-        "precision": 1.0,
-        "recall": 0.5766
-      },
-      {
-        "tau": 0.999999,
-        "precision": 1.0,
-        "recall": 0.53986
-      },
-      {
-        "tau": 0.999999,
-        "precision": 1.0,
-        "recall": 0.50186
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.47479
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.44444
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.39921
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.39921
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.34586
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.31824
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.31824
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.31824
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.20823
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.16266
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.16266
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.16266
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.16266
-      },
-      {
-        "tau": 1.0,
-        "precision": 1.0,
-        "recall": 0.16266
+      "errors": {
+        "false_fix": [
+          {
+            "text": "xieji.txt",
+            "intended": "xieji.txt",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 2e-06,
+            "max_prefix": 0.991769,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "แนวคิดนักรบคนที่",
+            "intended": "แนวคิดนักรบคนที่",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "สร้างต้นแบบและระบบนำร่องสำหรับกา",
+            "intended": "สร้างต้นแบบและระบบนำร่องสำหรับกา",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.923052,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "-koli",
+            "intended": "-koli",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.15455,
+            "max_prefix": 0.964475,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ไฟนอลแฟนตาซี",
+            "intended": "ไฟนอลแฟนตาซี",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 3e-06,
+            "max_prefix": 0.980642,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "P=L",
+            "intended": "P=L",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.977249,
+            "max_prefix": 0.977249,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ธนนท์",
+            "intended": "ธนนท์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.051473,
+            "max_prefix": 0.994332,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "ไนเตรตหรือซัลเฟต",
+            "intended": "ไนเตรตหรือซัลเฟต",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 6e-06,
+            "max_prefix": 0.964231,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "กำหนดแข่งขันในวันที่",
+            "intended": "กำหนดแข่งขันในวันที่",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.962977,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "แฟรนเซียมตกตะกอนร่วมกับเกลือซีเซ",
+            "intended": "แฟรนเซียมตกตะกอนร่วมกับเกลือซีเซ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.950563,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ls",
+            "intended": "ls",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.542275,
+            "max_prefix": 0.545264,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "Liu",
+            "intended": "Liu",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.676926,
+            "max_prefix": 0.676926,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "เนเฟอร์",
+            "intended": "เนเฟอร์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.00185,
+            "max_prefix": 0.96395,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "Z:",
+            "intended": "Z:",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.996204,
+            "max_prefix": 0.996204,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "lbs)",
+            "intended": "lbs)",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.071003,
+            "max_prefix": 0.990715,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "สร้างโดยจักรพรรดิจัสติเนียนแห่งไ",
+            "intended": "สร้างโดยจักรพรรดิจัสติเนียนแห่งไ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.923052,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "แนวคิดใหม่ในปัจจุบันก็เป็นไปตามแ",
+            "intended": "แนวคิดใหม่ในปัจจุบันก็เป็นไปตามแ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": ",นางสาวแพรว",
+            "intended": ",นางสาวแพรว",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.99881,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "-v",
+            "intended": "-v",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.719387,
+            "max_prefix": 0.719387,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "ธนนท์",
+            "intended": "ธนนท์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.051473,
+            "max_prefix": 0.994332,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "แนะนำไปดูเถอะไหว้เลย",
+            "intended": "แนะนำไปดูเถอะไหว้เลย",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.0,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "สรรคบุรี",
+            "intended": "สรรคบุรี",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.923052,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "สำเร็จการศึกษาธรรมศาสตรบัณฑิต",
+            "intended": "สำเร็จการศึกษาธรรมศาสตรบัณฑิต",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.923726,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "โฟน",
+            "intended": "โฟน",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.539527,
+            "max_prefix": 0.941834,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ศีลาจารย์",
+            "intended": "ศีลาจารย์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.967312,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ธค",
+            "intended": "ธค",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.509656,
+            "max_prefix": 0.933308,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "ดัส",
+            "intended": "ดัส",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.707367,
+            "max_prefix": 0.807938,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "แฟนๆ",
+            "intended": "แฟนๆ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.001587,
+            "max_prefix": 0.950563,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "\"นตฺถิ",
+            "intended": "\"นตฺถิ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.001004,
+            "max_prefix": 0.921739,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ระหว่างการแข่งขันอีกฝ่ายกระทำการ",
+            "intended": "ระหว่างการแข่งขันอีกฝ่ายกระทำการ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962122,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "โฟรโดก็ออกเดินทางจากแบ็กแลนด์พร้",
+            "intended": "โฟรโดก็ออกเดินทางจากแบ็กแลนด์พร้",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.941834,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": ",อาเจียน,",
+            "intended": ",อาเจียน,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.989601,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ระหว่างผู้ใช้งานด้วยกัน",
+            "intended": "ระหว่างผู้ใช้งานด้วยกัน",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962122,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "ระหว่างการประท้วงดังกล่าวได้มีผู",
+            "intended": "ระหว่างการประท้วงดังกล่าวได้มีผู",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962122,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "ไฟฉายก็ยังคงเปิดปิด",
+            "intended": "ไฟฉายก็ยังคงเปิดปิด",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.996414,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "vvPmoCz",
+            "intended": "vvPmoCz",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.259998,
+            "max_prefix": 0.998236,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "mukulu",
+            "intended": "mukulu",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.010828,
+            "max_prefix": 0.948034,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "แนวทางเป็นรูปแบบการใช้แท็บเล็ตพี",
+            "intended": "แนวทางเป็นรูปแบบการใช้แท็บเล็ตพี",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ทำการแข่งขันแบบพบกันหมดภายในกลุ่",
+            "intended": "ทำการแข่งขันแบบพบกันหมดภายในกลุ่",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.956231,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "dynamics)",
+            "intended": "dynamics)",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.973211,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "gR9h^@EKU?#",
+            "intended": "gR9h^@EKU?#",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.0,
+            "max_prefix": 0.970098,
+            "stage": "typing",
+            "at_char": 5
+          },
+          {
+            "text": "ฟินเซนต์",
+            "intended": "ฟินเซนต์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.974563,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "lyrics",
+            "intended": "lyrics",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.00042,
+            "max_prefix": 0.959798,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "c87c23058fe0672aefd1911061fe1b04",
+            "intended": "c87c23058fe0672aefd1911061fe1b04",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 1e-06,
+            "max_prefix": 0.964347,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "id=\"1994",
+            "intended": "id=\"1994",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.427937,
+            "max_prefix": 0.999257,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "กำกับโดย",
+            "intended": "กำกับโดย",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.96183,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": ",การผลิตรายการโทรทัศน์",
+            "intended": ",การผลิตรายการโทรทัศน์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.999617,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "cd",
+            "intended": "cd",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.578524,
+            "max_prefix": 0.595408,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "กำกับโดย",
+            "intended": "กำกับโดย",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.96183,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "สนป่ะตัว",
+            "intended": "สนป่ะตัว",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.001045,
+            "max_prefix": 0.930203,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "gmc.js",
+            "intended": "gmc.js",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.032279,
+            "max_prefix": 0.990704,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "แฟรงก์",
+            "intended": "แฟรงก์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 5e-06,
+            "max_prefix": 0.950563,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "lyrics",
+            "intended": "lyrics",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.00042,
+            "max_prefix": 0.959798,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ไฟเลี้ยว",
+            "intended": "ไฟเลี้ยว",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 2e-06,
+            "max_prefix": 0.980642,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ไฟลัม,",
+            "intended": "ไฟลัม,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 3.1e-05,
+            "max_prefix": 0.980642,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "my",
+            "intended": "my",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.642793,
+            "max_prefix": 0.642793,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "ระหว่างวันที่",
+            "intended": "ระหว่างวันที่",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962122,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "หาร",
+            "intended": "หาร",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.787918,
+            "max_prefix": 0.787918,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "กนฺตสีโล)",
+            "intended": "กนฺตสีโล)",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.976193,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ระหว่างมนุษย์คนแรกในอวกาศหรือสุน",
+            "intended": "ระหว่างมนุษย์คนแรกในอวกาศหรือสุน",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.962122,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "ไฟท้ายนี่ซีวิคชัดๆ",
+            "intended": "ไฟท้ายนี่ซีวิคชัดๆ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.0,
+            "max_prefix": 0.982372,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "9bd4fd5b77f6494f",
+            "intended": "9bd4fd5b77f6494f",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 1.4e-05,
+            "max_prefix": 0.985737,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "muji",
+            "intended": "muji",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.997211,
+            "max_prefix": 0.998935,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "lxxxv.py",
+            "intended": "lxxxv.py",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.001474,
+            "max_prefix": 0.947906,
+            "stage": "typing",
+            "at_char": 5
+          },
+          {
+            "text": "dFzjqNKHJB8Ab3",
+            "intended": "dFzjqNKHJB8Ab3",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 1e-06,
+            "max_prefix": 0.993338,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "grille,",
+            "intended": "grille,",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.000313,
+            "max_prefix": 0.925252,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "ระหว่างเกล็ดแต่ละชิ้น",
+            "intended": "ระหว่างเกล็ดแต่ละชิ้น",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962122,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "\"ราชาการ์ตูนไทย\"",
+            "intended": "\"ราชาการ์ตูนไทย\"",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 3e-06,
+            "max_prefix": 0.95184,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "mdu9edU9LHu",
+            "intended": "mdu9edU9LHu",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.402752,
+            "max_prefix": 0.940533,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "db157cb1de5ec14a",
+            "intended": "db157cb1de5ec14a",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 1e-06,
+            "max_prefix": 0.991873,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "เฟยหง",
+            "intended": "เฟยหง",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.442133,
+            "max_prefix": 0.986494,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "-v",
+            "intended": "-v",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.719387,
+            "max_prefix": 0.719387,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "กงๆ",
+            "intended": "กงๆ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.60502,
+            "max_prefix": 0.60502,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "Toriumi's",
+            "intended": "Toriumi's",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.583373,
+            "max_prefix": 0.841426,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": ".x7.Ba",
+            "intended": ".x7.Ba",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 2.6e-05,
+            "max_prefix": 0.959123,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "สร้างความเจริญรุ่งเรืองให้แก่ประ",
+            "intended": "สร้างความเจริญรุ่งเรืองให้แก่ประ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.923052,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ระหว่างจำนวนธรรมชาติ",
+            "intended": "ระหว่างจำนวนธรรมชาติ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962122,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": ",ซีพลัสพลัส",
+            "intended": ",ซีพลัสพลัส",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.000909,
+            "max_prefix": 0.999526,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "แนวรบด้านตะวันออกถูกผลักดันไปยัง",
+            "intended": "แนวรบด้านตะวันออกถูกผลักดันไปยัง",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "กำหนดให้เป็นทางด่วนแห่งชาติหมายเ",
+            "intended": "กำหนดให้เป็นทางด่วนแห่งชาติหมายเ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962977,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "c9e3b0fd2d1e",
+            "intended": "c9e3b0fd2d1e",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 1e-06,
+            "max_prefix": 0.978187,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "แนะนำพาเลทของ",
+            "intended": "แนะนำพาเลทของ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.0,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "(นพ.ธีรเกียรติ",
+            "intended": "(นพ.ธีรเกียรติ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.981598,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "แนะนำการเชื่อมโยงที่สำคัญระหว่าง",
+            "intended": "แนะนำการเชื่อมโยงที่สำคัญระหว่าง",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "\"นักเลงคอมพิวเตอร์\"",
+            "intended": "\"นักเลงคอมพิวเตอร์\"",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.921739,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "cm",
+            "intended": "cm",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.815453,
+            "max_prefix": 0.815453,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "สำเร็จรูปมาจำหน่ายให้กับนักสะสมแ",
+            "intended": "สำเร็จรูปมาจำหน่ายให้กับนักสะสมแ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.923726,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "vojne",
+            "intended": "vojne",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.023559,
+            "max_prefix": 0.973554,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "ผี\"",
+            "intended": "ผี\"",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.896961,
+            "max_prefix": 0.896961,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "meiki",
+            "intended": "meiki",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.965183,
+            "max_prefix": 0.973492,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "8th",
+            "intended": "8th",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.015738,
+            "max_prefix": 0.923907,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ธนกร",
+            "intended": "ธนกร",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.859571,
+            "max_prefix": 0.933308,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "f^iIvnA!FAmM",
+            "intended": "f^iIvnA!FAmM",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 4.4e-05,
+            "max_prefix": 0.999828,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "=00BBFF",
+            "intended": "=00BBFF",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.959284,
+            "max_prefix": 0.976362,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "Fr7kZh1",
+            "intended": "Fr7kZh1",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.008925,
+            "max_prefix": 0.998495,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "ฉี่ซวน",
+            "intended": "ฉี่ซวน",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1.2e-05,
+            "max_prefix": 0.968538,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "dba9c19e476b34b4045a062149d29c64",
+            "intended": "dba9c19e476b34b4045a062149d29c64",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 2e-06,
+            "max_prefix": 0.991873,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ฅ-คนรักรถ",
+            "intended": "ฅ-คนรักรถ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.00132,
+            "max_prefix": 0.973113,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "8th",
+            "intended": "8th",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.015738,
+            "max_prefix": 0.923907,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "vogKltwv",
+            "intended": "vogKltwv",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.999986,
+            "max_prefix": 0.999986,
+            "stage": "typing",
+            "at_char": 6
+          },
+          {
+            "text": "แนวร่วมปลดปล่อยเข้าร่วมในแนวร่วม",
+            "intended": "แนวร่วมปลดปล่อยเข้าร่วมในแนวร่วม",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "c040573ed29b8ede7c073a9ab80c6d49",
+            "intended": "c040573ed29b8ede7c073a9ab80c6d49",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 1e-05,
+            "max_prefix": 0.953362,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "สำเร็จการศึกษาในระดับอักษรศาสตรบ",
+            "intended": "สำเร็จการศึกษาในระดับอักษรศาสตรบ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.923726,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "FvVE-n",
+            "intended": "FvVE-n",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.527705,
+            "max_prefix": 0.991261,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "สรุปยังไงบ้างครับ",
+            "intended": "สรุปยังไงบ้างครับ",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.0,
+            "max_prefix": 0.923052,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "โฟโต้เรดดี้",
+            "intended": "โฟโต้เรดดี้",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 6e-06,
+            "max_prefix": 0.941834,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "si",
+            "intended": "si",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.616335,
+            "max_prefix": 0.616335,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "ยืดดดดดดดด",
+            "intended": "ยืดดดดดดดด",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.98551,
+            "max_prefix": 0.98551,
+            "stage": "typing",
+            "at_char": 9
+          },
+          {
+            "text": "แนวละครโรแมนติก",
+            "intended": "แนวละครโรแมนติก",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.968926,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ไฟฟ้า",
+            "intended": "ไฟฟ้า",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.001899,
+            "max_prefix": 0.980642,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "Cv_SAO.",
+            "intended": "Cv_SAO.",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 6e-06,
+            "max_prefix": 0.932063,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ระหว่างทาง",
+            "intended": "ระหว่างทาง",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962122,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "กำหนดวันชำระเงิน,",
+            "intended": "กำหนดวันชำระเงิน,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.962977,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "g4zvxbbD",
+            "intended": "g4zvxbbD",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.994184,
+            "max_prefix": 0.99992,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "\"น้ำงิ้ว\"",
+            "intended": "\"น้ำงิ้ว\"",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.921739,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "db8e4850f455e0152a62531141d6bb23",
+            "intended": "db8e4850f455e0152a62531141d6bb23",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 4e-06,
+            "max_prefix": 0.991873,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "เฟส",
+            "intended": "เฟส",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.676661,
+            "max_prefix": 0.799523,
+            "stage": "space",
+            "at_char": null
+          },
+          {
+            "text": "m[][]",
+            "intended": "m[][]",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.999984,
+            "max_prefix": 0.999985,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ไฟนอลแฟนตาซี",
+            "intended": "ไฟนอลแฟนตาซี",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 3e-06,
+            "max_prefix": 0.980642,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "zu2otzsw?VUyjkz",
+            "intended": "zu2otzsw?VUyjkz",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.000243,
+            "max_prefix": 0.956485,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "de:UN-Spezialorganisation",
+            "intended": "de:UN-Spezialorganisation",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.986321,
+            "stage": "typing",
+            "at_char": 5
+          },
+          {
+            "text": "โสนบานเช้า",
+            "intended": "โสนบานเช้า",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 1e-06,
+            "max_prefix": 0.974934,
+            "stage": "typing",
+            "at_char": 3
+          }
+        ],
+        "missed": [
+          {
+            "text": "ฟร่",
+            "intended": "aij",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.091536,
+            "max_prefix": 0.974563,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "dq",
+            "intended": "กๆ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.224609,
+            "max_prefix": 0.52489,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ป/",
+            "intended": "x2",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.434129,
+            "max_prefix": 0.434129,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Fil",
+            "intended": "โรส",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.231881,
+            "max_prefix": 0.53877,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สห",
+            "intended": "ls",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.2502,
+            "max_prefix": 0.421471,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นา",
+            "intended": "ok",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.326481,
+            "max_prefix": 0.880376,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "แม",
+            "intended": "c,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.038569,
+            "max_prefix": 0.038569,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นา",
+            "intended": "ok",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.326481,
+            "max_prefix": 0.880376,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Tok",
+            "intended": "ธนา",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.499454,
+            "max_prefix": 0.499454,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สิห",
+            "intended": "lbs",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.003577,
+            "max_prefix": 0.421471,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ir",
+            "intended": "รพ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.105491,
+            "max_prefix": 0.155481,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ot",
+            "intended": "นะ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.35866,
+            "max_prefix": 0.35866,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ot",
+            "intended": "นะ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.35866,
+            "max_prefix": 0.35866,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Fo",
+            "intended": "โน",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.161462,
+            "max_prefix": 0.53877,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นเสี",
+            "intended": "oglu",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.168171,
+            "max_prefix": 0.880376,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "fe",
+            "intended": "ดำ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.13069,
+            "max_prefix": 0.174923,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สิห",
+            "intended": "lbs",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.003577,
+            "max_prefix": 0.421471,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สห",
+            "intended": "ls",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.2502,
+            "max_prefix": 0.421471,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "vssssss",
+            "intended": "อหหหหหห",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.117743,
+            "max_prefix": 0.780319,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ข่",
+            "intended": "-j",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.01063,
+            "max_prefix": 0.358485,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ทอ",
+            "intended": "mv",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.459898,
+            "max_prefix": 0.583348,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ทั",
+            "intended": "my",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.293398,
+            "max_prefix": 0.583348,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "/ึ/ยย",
+            "intended": "272pp",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.136939,
+            "max_prefix": 0.137436,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ชจจฺฺโโ",
+            "intended": "=00BBFF",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.012448,
+            "max_prefix": 0.509667,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "เฝแท-",
+            "intended": "g/cm3",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.37458,
+            "max_prefix": 0.603289,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ปรปซ",
+            "intended": "xix:",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.17138,
+            "max_prefix": 0.17138,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ทั",
+            "intended": "my",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.293398,
+            "max_prefix": 0.583348,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ot",
+            "intended": "นะ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.35866,
+            "max_prefix": 0.35866,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ฉช",
+            "intended": "C=",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.028742,
+            "max_prefix": 0.968538,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ข้",
+            "intended": "-h",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.433553,
+            "max_prefix": 0.433553,
+            "stage": null,
+            "at_char": null
+          }
+        ],
+        "n_false_fix": 122,
+        "n_missed": 30
       }
-    ]
-  },
-  "val": {
-    "thresholds": {
-      "k_min": 2,
-      "tau_type": 0.9199999999999999,
-      "tau_space": 0.5
     },
-    "n": 30000,
-    "n_wrong": 14089,
-    "precision": 0.99015,
-    "recall": 0.99851,
-    "f1": 0.99431,
-    "recall_while_typing": 0.99539,
-    "recall_on_space": 0.00312,
-    "false_fix_rate": 0.008799,
-    "false_fix_rate_hard_negatives": 0.020325,
-    "recall_meant_thai": 0.99919,
-    "recall_meant_english": 0.99776,
-    "precision_at_base_rate": {
-      "0.02": 0.69843,
-      "0.05": 0.85658,
-      "0.1": 0.92652
-    },
-    "chars_to_detect": {
-      "median": 2.0,
-      "mean": 2.318,
-      "caught_by_3_chars": 0.94251,
-      "caught_by_5_chars": 0.99084,
-      "cdf": [
-        0.0,
-        0.75094,
-        0.94251,
-        0.98375,
-        0.99084,
-        0.99404,
-        0.99524,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99532,
-        0.99539,
-        0.99539,
-        0.99539,
-        0.99539,
-        0.99539,
-        0.99539,
-        0.99539,
-        0.99539
-      ]
-    },
-    "average_precision_full_text": 0.99998
-  },
-  "latency_us": {
-    "mean": 53.7,
-    "p50": 43.4,
-    "p99": 138.6
-  },
-  "errors": {
-    "false_fix": [
-      "xieji.txt",
-      "แนวคิดนักรบคนที่",
-      "สร้างต้นแบบและระบบนำร่องสำหรับกา",
-      "-koli",
-      "ไฟนอลแฟนตาซี",
-      "P=L",
-      "ธนนท์",
-      "ไนเตรตหรือซัลเฟต",
-      "กำหนดแข่งขันในวันที่",
-      "แฟรนเซียมตกตะกอนร่วมกับเกลือซีเซ",
-      "ls",
-      "Liu",
-      "เนเฟอร์",
-      "Z:",
-      "lbs)",
-      "สร้างโดยจักรพรรดิจัสติเนียนแห่งไ",
-      "แนวคิดใหม่ในปัจจุบันก็เป็นไปตามแ",
-      ",นางสาวแพรว",
-      "-v",
-      "ธนนท์",
-      "แนะนำไปดูเถอะไหว้เลย",
-      "สรรคบุรี",
-      "สำเร็จการศึกษาธรรมศาสตรบัณฑิต",
-      "โฟน",
-      "ศีลาจารย์",
-      "ธค",
-      "ดัส",
-      "แฟนๆ",
-      "\"นตฺถิ",
-      "ระหว่างการแข่งขันอีกฝ่ายกระทำการ",
-      "โฟรโดก็ออกเดินทางจากแบ็กแลนด์พร้",
-      ",อาเจียน,",
-      "ระหว่างผู้ใช้งานด้วยกัน",
-      "ระหว่างการประท้วงดังกล่าวได้มีผู",
-      "ไฟฉายก็ยังคงเปิดปิด",
-      "vvPmoCz",
-      "mukulu",
-      "แนวทางเป็นรูปแบบการใช้แท็บเล็ตพี",
-      "ทำการแข่งขันแบบพบกันหมดภายในกลุ่",
-      "dynamics)"
-    ],
-    "missed": [
-      "ฟร่ <- aij",
-      "dq <- กๆ",
-      "ป/ <- x2",
-      "Fil <- โรส",
-      "สห <- ls",
-      "นา <- ok",
-      "แม <- c,",
-      "นา <- ok",
-      "Tok <- ธนา",
-      "สิห <- lbs",
-      "ir <- รพ",
-      "ot <- นะ",
-      "ot <- นะ",
-      "Fo <- โน",
-      "นเสี <- oglu",
-      "fe <- ดำ",
-      "สิห <- lbs",
-      "สห <- ls",
-      "vssssss <- อหหหหหห",
-      "ข่ <- -j",
-      "ทอ <- mv",
-      "ทั <- my",
-      "/ึ/ยย <- 272pp",
-      "ชจจฺฺโโ <- =00BBFF",
-      "เฝแท- <- g/cm3",
-      "ปรปซ <- xix:",
-      "ทั <- my",
-      "ot <- นะ",
-      "ฉช <- C=",
-      "ข้ <- -h"
-    ]
+    "0.999": {
+      "test": {
+        "thresholds": {
+          "k_min": 2,
+          "tau_type": 0.993690426555198,
+          "tau_space": 0.99
+        },
+        "n": 30000,
+        "n_wrong": 14263,
+        "confusion": {
+          "tp": 14046,
+          "fp": 15,
+          "fn": 217,
+          "tn": 15722
+        },
+        "precision": 0.99893,
+        "recall": 0.98479,
+        "f1": 0.99181,
+        "recall_while_typing": 0.98247,
+        "recall_on_space": 0.00231,
+        "false_fix_rate": 0.000953,
+        "false_fix_rate_hard_negatives": 0.003526,
+        "recall_meant_thai": 0.99043,
+        "recall_meant_english": 0.97885,
+        "precision_at_base_rate": {
+          "0.02": 0.95472,
+          "0.05": 0.98194,
+          "0.1": 0.99136
+        },
+        "chars_to_detect": {
+          "median": 2.0,
+          "mean": 2.666,
+          "caught_by_3_chars": 0.83496,
+          "caught_by_5_chars": 0.9716,
+          "cdf": [
+            0.0,
+            0.53039,
+            0.83496,
+            0.94594,
+            0.9716,
+            0.97855,
+            0.98114,
+            0.98184,
+            0.98205,
+            0.98226,
+            0.98233,
+            0.9824,
+            0.9824,
+            0.9824,
+            0.9824,
+            0.9824,
+            0.9824,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247,
+            0.98247
+          ]
+        }
+      },
+      "val": {
+        "thresholds": {
+          "k_min": 2,
+          "tau_type": 0.993690426555198,
+          "tau_space": 0.99
+        },
+        "n": 30000,
+        "n_wrong": 14089,
+        "confusion": {
+          "tp": 13903,
+          "fp": 13,
+          "fn": 186,
+          "tn": 15898
+        },
+        "precision": 0.99907,
+        "recall": 0.9868,
+        "f1": 0.99289,
+        "recall_while_typing": 0.98403,
+        "recall_on_space": 0.00277,
+        "false_fix_rate": 0.000817,
+        "false_fix_rate_hard_negatives": 0.00271,
+        "recall_meant_thai": 0.99378,
+        "recall_meant_english": 0.97908,
+        "precision_at_base_rate": {
+          "0.02": 0.96101,
+          "0.05": 0.98451,
+          "0.1": 0.9926
+        },
+        "chars_to_detect": {
+          "median": 2.0,
+          "mean": 2.66,
+          "caught_by_3_chars": 0.83988,
+          "caught_by_5_chars": 0.97239,
+          "cdf": [
+            0.0,
+            0.5356,
+            0.83988,
+            0.94627,
+            0.97239,
+            0.98006,
+            0.98282,
+            0.98332,
+            0.98375,
+            0.98389,
+            0.98389,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98396,
+            0.98403,
+            0.98403,
+            0.98403,
+            0.98403,
+            0.98403,
+            0.98403,
+            0.98403,
+            0.98403
+          ]
+        }
+      },
+      "errors": {
+        "false_fix": [
+          {
+            "text": "ธนนท์",
+            "intended": "ธนนท์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.051473,
+            "max_prefix": 0.994332,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "Z:",
+            "intended": "Z:",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.996204,
+            "max_prefix": 0.996204,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": ",นางสาวแพรว",
+            "intended": ",นางสาวแพรว",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.99881,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "ธนนท์",
+            "intended": "ธนนท์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.051473,
+            "max_prefix": 0.994332,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "ไฟฉายก็ยังคงเปิดปิด",
+            "intended": "ไฟฉายก็ยังคงเปิดปิด",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.996414,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": "vvPmoCz",
+            "intended": "vvPmoCz",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.259998,
+            "max_prefix": 0.998236,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "id=\"1994",
+            "intended": "id=\"1994",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.427937,
+            "max_prefix": 0.999257,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": ",การผลิตรายการโทรทัศน์",
+            "intended": ",การผลิตรายการโทรทัศน์",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.0,
+            "max_prefix": 0.999617,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "muji",
+            "intended": "muji",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.997211,
+            "max_prefix": 0.998935,
+            "stage": "typing",
+            "at_char": 3
+          },
+          {
+            "text": ",ซีพลัสพลัส",
+            "intended": ",ซีพลัสพลัส",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.000909,
+            "max_prefix": 0.999526,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "f^iIvnA!FAmM",
+            "intended": "f^iIvnA!FAmM",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 4.4e-05,
+            "max_prefix": 0.999828,
+            "stage": "typing",
+            "at_char": 2
+          },
+          {
+            "text": "Fr7kZh1",
+            "intended": "Fr7kZh1",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.008925,
+            "max_prefix": 0.998495,
+            "stage": "typing",
+            "at_char": 5
+          },
+          {
+            "text": "vogKltwv",
+            "intended": "vogKltwv",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.999986,
+            "max_prefix": 0.999986,
+            "stage": "typing",
+            "at_char": 6
+          },
+          {
+            "text": "g4zvxbbD",
+            "intended": "g4zvxbbD",
+            "active": "en",
+            "kind": "hard_negative",
+            "source": "synthetic",
+            "full": 0.994184,
+            "max_prefix": 0.99992,
+            "stage": "typing",
+            "at_char": 4
+          },
+          {
+            "text": "m[][]",
+            "intended": "m[][]",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.999984,
+            "max_prefix": 0.999985,
+            "stage": "typing",
+            "at_char": 2
+          }
+        ],
+        "missed": [
+          {
+            "text": "ธนพ",
+            "intended": "Tor",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.922671,
+            "max_prefix": 0.933308,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "รกา",
+            "intended": "idk",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.977234,
+            "max_prefix": 0.977234,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ช๘นทๅึๅคฟ",
+            "intended": "=_om1718a",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.986854,
+            "max_prefix": 0.986854,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ฟร่",
+            "intended": "aij",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.091536,
+            "max_prefix": 0.974563,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "อำพั",
+            "intended": "very",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.966465,
+            "max_prefix": 0.966465,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "dq",
+            "intended": "กๆ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.224609,
+            "max_prefix": 0.52489,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "govoN",
+            "intended": "เนอน์",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.986358,
+            "max_prefix": 0.986358,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ผฟ",
+            "intended": "za",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.989116,
+            "max_prefix": 0.989116,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "d'",
+            "intended": "กง",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.835362,
+            "max_prefix": 0.835362,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ป/",
+            "intended": "x2",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.434129,
+            "max_prefix": 0.434129,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Gvo",
+            "intended": "ฌอน",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.907808,
+            "max_prefix": 0.907808,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กท",
+            "intended": "dm",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.929308,
+            "max_prefix": 0.929308,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สรำห",
+            "intended": "lies",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.989778,
+            "max_prefix": 0.989778,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ia,\"",
+            "intended": "รฟม.",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.948545,
+            "max_prefix": 0.948545,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "r8",
+            "intended": "พค",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.8335,
+            "max_prefix": 0.8335,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Fil",
+            "intended": "โรส",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.231881,
+            "max_prefix": 0.53877,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สห",
+            "intended": "ls",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.2502,
+            "max_prefix": 0.421471,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "หยด",
+            "intended": "spf",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.758139,
+            "max_prefix": 0.908408,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กท",
+            "intended": "dm",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.929308,
+            "max_prefix": 0.929308,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "vxmko",
+            "intended": "อปทาน",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.981115,
+            "max_prefix": 0.981115,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กรก",
+            "intended": "did",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.513136,
+            "max_prefix": 0.547111,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "เน",
+            "intended": "go",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.683805,
+            "max_prefix": 0.683805,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "โฟรผ",
+            "intended": "Faiz",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.941761,
+            "max_prefix": 0.941834,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "เฟยใ",
+            "intended": "gap.",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.967908,
+            "max_prefix": 0.967908,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "หน",
+            "intended": "so",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.773221,
+            "max_prefix": 0.773221,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "sv,",
+            "intended": "หอม",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.977667,
+            "max_prefix": 0.977667,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "พท",
+            "intended": "rm",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.831571,
+            "max_prefix": 0.831571,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "[o",
+            "intended": "บน",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.954424,
+            "max_prefix": 0.954424,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ีม",
+            "intended": "u,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.975429,
+            "max_prefix": 0.975429,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "mu,",
+            "intended": "ทีม",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.979016,
+            "max_prefix": 0.979016,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "อำพั",
+            "intended": "very",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.966465,
+            "max_prefix": 0.966465,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ดำไ",
+            "intended": "few",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.973413,
+            "max_prefix": 0.973413,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ญีข/-ต",
+            "intended": "Pu-239",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.582168,
+            "max_prefix": 0.984867,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ieiu",
+            "intended": "รำรี",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.97808,
+            "max_prefix": 0.97808,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "rumumu",
+            "intended": "พีทีที",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.986295,
+            "max_prefix": 0.986295,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ธนย",
+            "intended": "Top",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.987371,
+            "max_prefix": 0.987371,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นสก",
+            "intended": "old",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.977622,
+            "max_prefix": 0.977622,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "mb,",
+            "intended": "ทิม",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989528,
+            "max_prefix": 0.989528,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นา",
+            "intended": "ok",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.326481,
+            "max_prefix": 0.880376,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "โนป",
+            "intended": "Fox",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.95878,
+            "max_prefix": 0.95878,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "แม",
+            "intended": "c,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.038569,
+            "max_prefix": 0.038569,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นา",
+            "intended": "ok",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.326481,
+            "max_prefix": 0.880376,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ขี",
+            "intended": "-u",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.871368,
+            "max_prefix": 0.871368,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Tok",
+            "intended": "ธนา",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.499454,
+            "max_prefix": 0.499454,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สิห",
+            "intended": "lbs",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.003577,
+            "max_prefix": 0.421471,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "caoq",
+            "intended": "แฟนๆ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.827815,
+            "max_prefix": 0.923418,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นพ",
+            "intended": "or",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.986134,
+            "max_prefix": 0.986134,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ๆห",
+            "intended": "qs",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.949829,
+            "max_prefix": 0.949829,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "avo",
+            "intended": "ฟอน",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.893534,
+            "max_prefix": 0.893534,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "lo\"",
+            "intended": "สน.",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.971673,
+            "max_prefix": 0.971673,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "wrR^ipN",
+            "intended": "ไพฑูรย์",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.771024,
+            "max_prefix": 0.771024,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ขย",
+            "intended": "-p",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.95699,
+            "max_prefix": 0.95699,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ib",
+            "intended": "ริ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.910646,
+            "max_prefix": 0.910646,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": ",fX",
+            "intended": "มด)",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.976988,
+            "max_prefix": 0.976988,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ir",
+            "intended": "รพ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.105491,
+            "max_prefix": 0.155481,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ฉัทพี",
+            "intended": "Cymru",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.980651,
+            "max_prefix": 0.980651,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สนไ",
+            "intended": "low",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.971927,
+            "max_prefix": 0.971927,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สิห๗",
+            "intended": "lbs)",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.928695,
+            "max_prefix": 0.928695,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "i7",
+            "intended": "รึ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.950203,
+            "max_prefix": 0.950203,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ยห",
+            "intended": "ps",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.971009,
+            "max_prefix": 0.971009,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ธนพืม",
+            "intended": "Torn,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.98972,
+            "max_prefix": 0.98972,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ot",
+            "intended": "นะ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.35866,
+            "max_prefix": 0.35866,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นพ",
+            "intended": "or",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.986134,
+            "max_prefix": 0.986134,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "โพรรห",
+            "intended": "Friis",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.931154,
+            "max_prefix": 0.931154,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "desof",
+            "intended": "กำหนด",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989143,
+            "max_prefix": 0.989143,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "86d",
+            "intended": "คุก",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.878247,
+            "max_prefix": 0.878247,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ธฮ",
+            "intended": "TV",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.987068,
+            "max_prefix": 0.987068,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สนเ",
+            "intended": "log",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.969277,
+            "max_prefix": 0.969277,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ot",
+            "intended": "นะ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.35866,
+            "max_prefix": 0.35866,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กรดด",
+            "intended": "diff",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.97008,
+            "max_prefix": 0.97008,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Fo",
+            "intended": "โน",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.161462,
+            "max_prefix": 0.53877,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ฉณ",
+            "intended": "CI",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.96463,
+            "max_prefix": 0.968538,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "นเสี",
+            "intended": "oglu",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.168171,
+            "max_prefix": 0.880376,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "รกา",
+            "intended": "idk",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.977234,
+            "max_prefix": 0.977234,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "W:W",
+            "intended": "\"ซ\"",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.84936,
+            "max_prefix": 0.992876,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำส",
+            "intended": "del",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.978962,
+            "max_prefix": 0.978962,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ยกด",
+            "intended": "pdf",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.986405,
+            "max_prefix": 0.986405,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "fe",
+            "intended": "ดำ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.13069,
+            "max_prefix": 0.174923,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สิห",
+            "intended": "lbs",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.003577,
+            "max_prefix": 0.421471,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "onvcdgoHo",
+            "intended": "นือแกเน็น",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.624549,
+            "max_prefix": 0.624549,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "โนป",
+            "intended": "Fox",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.95878,
+            "max_prefix": 0.95878,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "โฉ",
+            "intended": "FC",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.944612,
+            "max_prefix": 0.944612,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "a\"",
+            "intended": "ฟ.",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.959478,
+            "max_prefix": 0.959478,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "gi:",
+            "intended": "เรซ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.967528,
+            "max_prefix": 0.967528,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Vux",
+            "intended": "ฮีป",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.901016,
+            "max_prefix": 0.901016,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "พีดดำ",
+            "intended": "ruffe",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.797959,
+            "max_prefix": 0.797959,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "รกา",
+            "intended": "idk",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.977234,
+            "max_prefix": 0.977234,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "เน",
+            "intended": "go",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.683805,
+            "max_prefix": 0.683805,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระม",
+            "intended": "it,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.95522,
+            "max_prefix": 0.95522,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "mb,",
+            "intended": "ทิม",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989528,
+            "max_prefix": 0.989528,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "-v",
+            "intended": "ขอ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.719387,
+            "max_prefix": 0.719387,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ธหนร",
+            "intended": "Tsoi",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.910372,
+            "max_prefix": 0.983773,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "--ฏ",
+            "intended": "33D",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.943033,
+            "max_prefix": 0.943033,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ro,",
+            "intended": "พนม",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.666096,
+            "max_prefix": 0.73919,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ปก",
+            "intended": "xd",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.885941,
+            "max_prefix": 0.885941,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สห",
+            "intended": "ls",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.2502,
+            "max_prefix": 0.421471,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "vIbriiI",
+            "intended": "อณิพรรณ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.977769,
+            "max_prefix": 0.977769,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "vssssss",
+            "intended": "อหหหหหห",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.117743,
+            "max_prefix": 0.780319,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "GviNGu",
+            "intended": "ฌอร์ฌี",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.930684,
+            "max_prefix": 0.954462,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "c'",
+            "intended": "แง",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.942457,
+            "max_prefix": 0.942457,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "lh,",
+            "intended": "ส้ม",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.964688,
+            "max_prefix": 0.964688,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ข่",
+            "intended": "-j",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.01063,
+            "max_prefix": 0.358485,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "digdK,",
+            "intended": "กรเกษม",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.987257,
+            "max_prefix": 0.987257,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "f6",
+            "intended": "ดุ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.8862,
+            "max_prefix": 0.8862,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "fb",
+            "intended": "ดิ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.95032,
+            "max_prefix": 0.95032,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "s6s6",
+            "intended": "หุหุ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.930388,
+            "max_prefix": 0.930388,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ศะก",
+            "intended": "Ltd",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.897276,
+            "max_prefix": 0.949935,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ปก",
+            "intended": "xd",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.885941,
+            "max_prefix": 0.885941,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กแ",
+            "intended": "dc",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.901697,
+            "max_prefix": 0.901697,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ทอ",
+            "intended": "mv",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.459898,
+            "max_prefix": 0.583348,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ยกด",
+            "intended": "pdf",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.986405,
+            "max_prefix": 0.986405,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "F88",
+            "intended": "โคค",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.980086,
+            "max_prefix": 0.984264,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "เฟ",
+            "intended": "ga",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.799523,
+            "max_prefix": 0.799523,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำส",
+            "intended": "del",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.978962,
+            "max_prefix": 0.978962,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ปก",
+            "intended": "xd",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.885941,
+            "max_prefix": 0.885941,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ศนิน",
+            "intended": "Lobo",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.95293,
+            "max_prefix": 0.988343,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กแ",
+            "intended": "dc",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.901697,
+            "max_prefix": 0.901697,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ศรผท",
+            "intended": "Lizm",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.985147,
+            "max_prefix": 0.992458,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ZiNX",
+            "intended": "(ร์)",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.954048,
+            "max_prefix": 0.980942,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ปก",
+            "intended": "xd",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.885941,
+            "max_prefix": 0.885941,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "แรำม",
+            "intended": "cie,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.976962,
+            "max_prefix": 0.985896,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ทั",
+            "intended": "my",
+            "active": "th",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.293398,
+            "max_prefix": 0.583348,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ธนพ",
+            "intended": "Tor",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.922671,
+            "max_prefix": 0.933308,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "-v",
+            "intended": "ขอ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.719387,
+            "max_prefix": 0.719387,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กท",
+            "intended": "dm",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.929308,
+            "max_prefix": 0.929308,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "/ึ/ยย",
+            "intended": "272pp",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.136939,
+            "max_prefix": 0.137436,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระม",
+            "intended": "it,",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.95522,
+            "max_prefix": 0.95522,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ขื",
+            "intended": "-n",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.980345,
+            "max_prefix": 0.980345,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "i0gi-",
+            "intended": "รจเรข",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.858107,
+            "max_prefix": 0.858107,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ดัร",
+            "intended": "fyi",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.988468,
+            "max_prefix": 0.988468,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ชจจฺฺโโ",
+            "intended": "=00BBFF",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.012448,
+            "max_prefix": 0.509667,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "co=",
+            "intended": "แนช",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.9793,
+            "max_prefix": 0.9793,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "เฝแท-",
+            "intended": "g/cm3",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.37458,
+            "max_prefix": 0.603289,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ouh",
+            "intended": "นี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.989096,
+            "max_prefix": 0.989096,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ธหนร",
+            "intended": "Tsoi",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.910372,
+            "max_prefix": 0.983773,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ธหนรงห",
+            "intended": "Tsoi's",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.156834,
+            "max_prefix": 0.983773,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ญีข/-ต",
+            "intended": "Pu-239",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.582168,
+            "max_prefix": 0.984867,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "gi:",
+            "intended": "เรซ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.967528,
+            "max_prefix": 0.967528,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระ",
+            "intended": "it",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.915053,
+            "max_prefix": 0.915053,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ฌัท",
+            "intended": "Gym",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.894842,
+            "max_prefix": 0.986846,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ดระ",
+            "intended": "fit",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.972568,
+            "max_prefix": 0.972568,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ญีฆร/",
+            "intended": "PuSi2",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.981144,
+            "max_prefix": 0.988119,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำห",
+            "intended": "des",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.962977,
+            "max_prefix": 0.962977,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "หห้",
+            "intended": "ssh",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.975822,
+            "max_prefix": 0.975822,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "mu,",
+            "intended": "ทีม",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.979016,
+            "max_prefix": 0.979016,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "'uh",
+            "intended": "งี้",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.866838,
+            "max_prefix": 0.866838,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "96IpN",
+            "intended": "ตุณย์",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.982159,
+            "max_prefix": 0.990624,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ปรปซ",
+            "intended": "xix:",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.17138,
+            "max_prefix": 0.17138,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "Fot",
+            "intended": "โนะ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.83768,
+            "max_prefix": 0.83768,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "กำ",
+            "intended": "de",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.96183,
+            "max_prefix": 0.96183,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ขร",
+            "intended": "-i",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.950142,
+            "max_prefix": 0.950142,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ขส",
+            "intended": "-l",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.968845,
+            "max_prefix": 0.968845,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ทั",
+            "intended": "my",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.293398,
+            "max_prefix": 0.583348,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ot",
+            "intended": "นะ",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.35866,
+            "max_prefix": 0.35866,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ยกด",
+            "intended": "pdf",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.986405,
+            "max_prefix": 0.986405,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ระห",
+            "intended": "its",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.962122,
+            "max_prefix": 0.962122,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ฉช",
+            "intended": "C=",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.028742,
+            "max_prefix": 0.968538,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "สนนา",
+            "intended": "look",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.968506,
+            "max_prefix": 0.972081,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "อำพั",
+            "intended": "very",
+            "active": "th",
+            "kind": "normal",
+            "source": "wiki_en",
+            "full": 0.966465,
+            "max_prefix": 0.966465,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "[o",
+            "intended": "บน",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.954424,
+            "max_prefix": 0.954424,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "skp",
+            "intended": "หาย",
+            "active": "en",
+            "kind": "normal",
+            "source": "wisesight",
+            "full": 0.968751,
+            "max_prefix": 0.968751,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "[u",
+            "intended": "บี",
+            "active": "en",
+            "kind": "normal",
+            "source": "wiki_th",
+            "full": 0.972928,
+            "max_prefix": 0.972928,
+            "stage": null,
+            "at_char": null
+          },
+          {
+            "text": "ข้",
+            "intended": "-h",
+            "active": "th",
+            "kind": "tech_wrong",
+            "source": "synthetic",
+            "full": 0.433553,
+            "max_prefix": 0.433553,
+            "stage": null,
+            "at_char": null
+          }
+        ],
+        "n_false_fix": 15,
+        "n_missed": 217
+      }
+    }
   }
 }

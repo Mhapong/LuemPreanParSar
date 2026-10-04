@@ -1,8 +1,10 @@
 # CLAUDE.md
 
-Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedmanee <-> US QWERTY) and fix it on Linux. Deadline 2026-10-08. Plan and daily checklist: docs/IMPLEMENTATION_PLAN.md (Thai). Flow diagrams: docs/FLOW.md. Report figure checklist: docs/FIGURES.md. Work log with rationale and problems: docs/WORKLOG.md. Glossary: docs/GLOSSARY.md. Report draft: docs/REPORT.md (fill ⬜ TODO sections as results arrive).
+Course project (PSU): detect text typed in the wrong keyboard layout (Thai Kedmanee <-> US QWERTY) and fix it on Linux. Deadline 2026-10-08. Plan and daily checklist: docs/IMPLEMENTATION_PLAN.md (Thai). Flow diagrams: docs/FLOW.md. Report figure checklist: docs/FIGURES.md. Work log with rationale and problems: docs/WORKLOG.md. Glossary: docs/GLOSSARY.md. Report draft: docs/REPORT.md (fill ⬜ TODO sections as results arrive). Every problem added to the WORKLOG problem table must also be summarized in REPORT.md section 8 (problems & fixes, grouped by area; major ones as prose in 8.1).
 
 Always reply to the user in Thai (code, commands and technical terms stay English).
+
+Git commits: no Claude attribution (no `Co-Authored-By` trailer, no mention of Claude) — the user asked for this repeatedly.
 
 Docs (README.md, docs/*) are Thai and must be readable by a non-technical reader: explain terms on first use or link docs/GLOSSARY.md, use concrete examples, put technical detail inside `<details>` blocks. This file (CLAUDE.md) stays technical English.
 
@@ -12,6 +14,7 @@ Docs (README.md, docs/*) are Thai and must be readable by a non-technical reader
 - `uv run python scripts/verify_layout.py` checks `src/luem/layout.py` against `/usr/share/X11/xkb/symbols/th`
 - Pipeline: `scripts/download_corpus.py` -> `scripts/build_dataset.py` -> `scripts/train_baselines.py` -> `eval/evaluate.py --model ngram` (thresholds chosen on val, reported on test; `--limit 30000` default)
 - Neural: `scripts/train_cnn.py [--arch gru] --out models/runs/<name>/cnn.pt` -> `scripts/export_onnx.py --ckpt ...` (verifies ONNX == torch) -> `eval/evaluate.py --model cnn --models-dir models/runs/<name> --results-dir <scratch>` to compare variants on val; copy the chosen one to `models/cnn.onnx`. Use `python -u` when tee-ing logs.
+- Daemon: `uv run --extra demo python demo/daemon.py [--dry-run] [-v] [--setup]`; decision logic in `src/luem/corrector.py` (pure, tested against a simulated desktop in `tests/test_corrector.py`), I/O in `demo/daemon.py`. Hotkeys: Super+Alt+F convert/undo word, Super+Alt+P pause, Super+Alt+1/2 select en/th.
 - Models live in `src/luem/models/` and are loaded by name via `luem.models.load_model`; add new ones to `NAMES`.
 
 ## Conventions
@@ -19,6 +22,7 @@ Docs (README.md, docs/*) are Thai and must be readable by a non-technical reader
 - Every model exposes `predict(text: str) -> float` = P(typed in the wrong layout), so eval and demo can swap models.
 - Problem is binary: the script of the typed text reveals the active layout, so the model only decides ok vs wrong.
 - Main neural model is a char-CNN (GRU for comparison); both export to the same ONNX interface (`ids` int64 [B, L], PAD=0 on the right -> `p_wrong` [B]) and run through `CNNModel` in `src/luem/models/cnn.py`. The CNN is causal so a padded prefix scores like the prefix alone; keep it that way. Torch code lives only in `cnn_net.py` (the demo has no torch). Dataset stores full segments, not prefixes: the CNN DataLoader samples a random prefix each epoch; `evaluate.py` expands prefixes 1..n itself.
+- Corrections are deferred: a decision sets `Corrector.pending`; the daemon calls `flush()` only when `active_keys()` is empty, with the physical keyboards grabbed (EVIOCGRAB) and keys typed meanwhile replayed through uinput afterwards. Injecting while keys are held broke real typing ("hello" -> "lheo": a held key can't be re-pressed, keys typed during the fix landed mid-word; held Super/Alt would turn injected keys into shortcuts). Never grab while a key is down (its release would be lost -> stuck key).
 - Detection runs at two moments with the same model: while typing (`τ_type`, high, after `k_min` chars) and on Space (`τ_space`, lower, full word). On-Space correction must also delete and retype the Space, since the daemon reads keys passively.
 - `data/` and `models/` are regenerable and not committed. Never put personal shell history or keystroke logs into committed data.
 

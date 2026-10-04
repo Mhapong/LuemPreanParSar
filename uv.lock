@@ -872,6 +872,8 @@ ml = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "matplotlib" },
+    { name = "numpy" },
     { name = "pytest" },
 ]
 
@@ -893,7 +895,11 @@ requires-dist = [
 provides-extras = ["data", "ml", "demo"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pytest" }]
+dev = [
+    { name = "matplotlib" },
+    { name = "numpy" },
+    { name = "pytest" },
+]
 
 [[package]]
 name = "markupsafe"

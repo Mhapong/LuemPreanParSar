@@ -17,7 +17,7 @@ import numpy as np
 
 from luem.dataset import read_samples
 from luem.metrics import evaluate, first_fire, select_thresholds
-from luem.models import NAMES, load_model
+from luem.models import MODELS_DIR, NAMES, load_model
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "processed"
@@ -41,9 +41,9 @@ def latency_us(model, rows, n: int = 2000) -> dict:
             "p99": round(times[int(len(times) * 0.99)], 1)}
 
 
-def run(name: str, val, test, target: float) -> dict:
+def run(name: str, val, test, target: float, models_dir: Path = MODELS_DIR) -> dict:
     t0 = time.time()
-    model = load_model(name)
+    model = load_model(name, models_dir)
     print(f"[{name}] loaded ({time.time() - t0:.0f}s)")
     val_scores = score_all(model, val)
     print(f"[{name}] scored val ({time.time() - t0:.0f}s)")
@@ -71,17 +71,19 @@ def main() -> None:
     p.add_argument("--model", action="append", choices=NAMES, help="repeatable; default: all")
     p.add_argument("--limit", type=int, default=30_000, help="random subset of val/test (0 = all)")
     p.add_argument("--target", type=float, default=0.99, help="minimum precision when choosing thresholds")
+    p.add_argument("--models-dir", type=Path, default=MODELS_DIR, help="e.g. models/runs/b to compare a variant")
+    p.add_argument("--results-dir", type=Path, default=RESULTS)
     args = p.parse_args()
 
     val = read_samples(DATA / "val.jsonl", args.limit, seed=1)
     test = read_samples(DATA / "test.jsonl", args.limit, seed=2)
     print(f"val={len(val):,} test={len(test):,} samples")
-    RESULTS.mkdir(parents=True, exist_ok=True)
+    args.results_dir.mkdir(parents=True, exist_ok=True)
 
     results = []
     for name in args.model or NAMES:
-        r = run(name, val, test, args.target)
-        (RESULTS / f"{name}.json").write_text(json.dumps(r, ensure_ascii=False, indent=2), encoding="utf-8")
+        r = run(name, val, test, args.target, args.models_dir)
+        (args.results_dir / f"{name}.json").write_text(json.dumps(r, ensure_ascii=False, indent=2), encoding="utf-8")
         results.append(r)
 
     print("\nTest results (thresholds chosen on val, target precision %.2f)" % args.target)

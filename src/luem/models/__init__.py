@@ -5,7 +5,7 @@ from pathlib import Path
 from luem.models.base import Model
 
 MODELS_DIR = Path(__file__).resolve().parents[3] / "models"
-NAMES = ("dictionary", "ngram")
+NAMES = ("dictionary", "ngram", "cnn", "gru")
 
 
 def load_model(name: str, models_dir: Path = MODELS_DIR) -> Model:
@@ -15,4 +15,7 @@ def load_model(name: str, models_dir: Path = MODELS_DIR) -> Model:
     if name == "ngram":
         from luem.models.ngram import NgramModel
         return NgramModel.load(models_dir / "ngram.pkl")
+    if name in ("cnn", "gru"):  # same ONNX interface, see cnn.py
+        from luem.models.cnn import CNNModel
+        return CNNModel.load(models_dir / f"{name}.onnx", name)
     raise ValueError(f"unknown model {name!r}, choose from {NAMES}")

@@ -1,0 +1,514 @@
+{
+  "model": "cnn",
+  "target_precision": 0.99,
+  "test": {
+    "thresholds": {
+      "k_min": 2,
+      "tau_type": 0.9299999999999999,
+      "tau_space": 0.5
+    },
+    "n": 30000,
+    "n_wrong": 14263,
+    "precision": 0.99192,
+    "recall": 0.99797,
+    "f1": 0.99493,
+    "recall_while_typing": 0.99341,
+    "recall_on_space": 0.00456,
+    "false_fix_rate": 0.007371,
+    "false_fix_rate_hard_negatives": 0.023272,
+    "recall_meant_thai": 0.9985,
+    "recall_meant_english": 0.99741,
+    "precision_at_base_rate": {
+      "0.02": 0.73426,
+      "0.05": 0.87693,
+      "0.1": 0.93767
+    },
+    "chars_to_detect": {
+      "median": 2.0,
+      "mean": 2.329,
+      "caught_by_3_chars": 0.93627,
+      "caught_by_5_chars": 0.98878,
+      "cdf": [
+        0.0,
+        0.74318,
+        0.93627,
+        0.98114,
+        0.98878,
+        0.99166,
+        0.99306,
+        0.99334,
+        0.99334,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341,
+        0.99341
+      ]
+    },
+    "average_precision_full_text": 0.99997,
+    "pr_curve_full_text": [
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.47543,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.7755,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.79695,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.0,
+        "precision": 0.81882,
+        "recall": 1.0
+      },
+      {
+        "tau": 1e-06,
+        "precision": 0.84995,
+        "recall": 1.0
+      },
+      {
+        "tau": 1e-05,
+        "precision": 0.87659,
+        "recall": 1.0
+      },
+      {
+        "tau": 3.5e-05,
+        "precision": 0.89987,
+        "recall": 1.0
+      },
+      {
+        "tau": 6.1e-05,
+        "precision": 0.93485,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.000607,
+        "precision": 0.96725,
+        "recall": 1.0
+      },
+      {
+        "tau": 0.666296,
+        "precision": 0.99881,
+        "recall": 0.99699
+      },
+      {
+        "tau": 0.999243,
+        "precision": 0.99978,
+        "recall": 0.96242
+      },
+      {
+        "tau": 0.999766,
+        "precision": 0.99985,
+        "recall": 0.92673
+      },
+      {
+        "tau": 0.999915,
+        "precision": 0.99992,
+        "recall": 0.89119
+      },
+      {
+        "tau": 0.999979,
+        "precision": 1.0,
+        "recall": 0.85557
+      },
+      {
+        "tau": 0.999991,
+        "precision": 1.0,
+        "recall": 0.8229
+      },
+      {
+        "tau": 0.999996,
+        "precision": 1.0,
+        "recall": 0.78455
+      },
+      {
+        "tau": 0.999999,
+        "precision": 1.0,
+        "recall": 0.74872
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.71703
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.68183
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.64355
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      },
+      {
+        "tau": 1.0,
+        "precision": 1.0,
+        "recall": 0.63072
+      }
+    ]
+  },
+  "val": {
+    "thresholds": {
+      "k_min": 2,
+      "tau_type": 0.9299999999999999,
+      "tau_space": 0.5
+    },
+    "n": 30000,
+    "n_wrong": 14089,
+    "precision": 0.99077,
+    "recall": 0.99815,
+    "f1": 0.99445,
+    "recall_while_typing": 0.99517,
+    "recall_on_space": 0.00298,
+    "false_fix_rate": 0.008233,
+    "false_fix_rate_hard_negatives": 0.02439,
+    "recall_meant_thai": 0.99932,
+    "recall_meant_english": 0.99686,
+    "precision_at_base_rate": {
+      "0.02": 0.71216,
+      "0.05": 0.86451,
+      "0.1": 0.93089
+    },
+    "chars_to_detect": {
+      "median": 2.0,
+      "mean": 2.322,
+      "caught_by_3_chars": 0.94123,
+      "caught_by_5_chars": 0.9907,
+      "cdf": [
+        0.0,
+        0.74839,
+        0.94123,
+        0.98332,
+        0.9907,
+        0.99375,
+        0.99489,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.9951,
+        0.99517,
+        0.99517,
+        0.99517,
+        0.99517,
+        0.99517,
+        0.99517,
+        0.99517,
+        0.99517
+      ]
+    },
+    "average_precision_full_text": 0.99998
+  },
+  "latency_us": {
+    "mean": 58.3,
+    "p50": 50.6,
+    "p99": 148.3
+  },
+  "errors": {
+    "false_fix": [
+      "xieji.txt",
+      "แนวคิดนักรบคนที่",
+      "osoyoosApieceSoulchild",
+      "-koli",
+      "ไฟนอลแฟนตาซี",
+      "ไนเตรตหรือซัลเฟต",
+      "กำหนดแข่งขันในวันที่",
+      "ls",
+      "ธนปญฺโญ",
+      "Liu",
+      "เนเฟอร์",
+      "god",
+      "Z:",
+      "lbs)",
+      "ok",
+      "แนวคิดใหม่ในปัจจุบันก็เป็นไปตามแ",
+      "ok",
+      "-v",
+      "แนะนำไปดูเถอะไหว้เลย",
+      "โฟน",
+      "ศีลาจารย์",
+      "ธค",
+      "ดัส",
+      "\"นตฺถิ",
+      "ระหว่างการแข่งขันอีกฝ่ายกระทำการ",
+      "โฟรโดก็ออกเดินทางจากแบ็กแลนด์พร้",
+      ",อาเจียน,",
+      "ระหว่างผู้ใช้งานด้วยกัน",
+      "ระหว่างการประท้วงดังกล่าวได้มีผู",
+      "ไฟฉายก็ยังคงเปิดปิด",
+      "ok",
+      "vvPmoCz",
+      "mukulu",
+      "god",
+      "แนวทางเป็นรูปแบบการใช้แท็บเล็ตพี",
+      "dynamics)",
+      "ฟินเซนต์",
+      "lyrics",
+      "c87c23058fe0672aefd1911061fe1b04",
+      "id=\"1994"
+    ],
+    "missed": [
+      "ฟร่ <- aij",
+      "Fil <- โรส",
+      "สห <- ls",
+      "กรก <- did",
+      "นา <- ok",
+      "แม <- c,",
+      "นา <- ok",
+      "Tok <- ธนา",
+      "สิห <- lbs",
+      "wrR^ipN <- ไพฑูรย์",
+      "ir <- รพ",
+      "ot <- นะ",
+      "ot <- นะ",
+      "Fo <- โน",
+      "นเสี <- oglu",
+      "fe <- ดำ",
+      "สิห <- lbs",
+      "onvcdgoHo <- นือแกเน็น",
+      "สห <- ls",
+      "vssssss <- อหหหหหห",
+      "ข่ <- -j",
+      "ทอ <- mv",
+      "ทั <- my",
+      "ชจจฺฺโโ <- =00BBFF",
+      "เฝแท- <- g/cm3",
+      "ทั <- my",
+      "ot <- นะ",
+      "ฉช <- C=",
+      "ข้ <- -h"
+    ]
+  }
+}

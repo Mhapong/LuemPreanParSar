@@ -26,7 +26,9 @@ RESULTS = ROOT / "eval" / "results"
 FIGURES = ROOT / "docs" / "figures"
 MODELS = ("dictionary", "ngram", "cnn", "gru")
 LABELS = {"dictionary": "พจนานุกรม", "ngram": "สถิติกลุ่มตัวอักษร (n-gram)", "cnn": "CNN", "gru": "GRU"}
-COLORS = {"dictionary": "#9e9e9e", "ngram": "#ef8a17", "cnn": "#1f6fb2", "gru": "#4caf50"}
+# dataviz reference palette (colorblind-checked); the dictionary baseline stays gray on purpose
+COLORS = {"dictionary": "#8a8985", "ngram": "#eb6834", "cnn": "#2a78d6", "gru": "#1baf7a"}
+STYLE = {"cnn": {"lw": 2.6, "zorder": 4}, "gru": {"lw": 1.6, "ls": "--", "zorder": 5}}  # GRU dashed on top: CNN shows through
 RUNS = {"cnn_a_base": "CNN (ใช้จริง)", "cnn_b_hard3": "CNN น้ำหนักตัวอย่างหลอก x3",
         "cnn_c_wide": "CNN ขนาดใหญ่ขึ้น", "gru": "GRU"}
 THAI_FONTS = ("Leelawadee UI", "Tahoma", "Noto Sans Thai", "Noto Sans Thai Looped", "Loma", "Garuda", "Sarabun")
@@ -67,7 +69,7 @@ def fig_training(path: Path) -> None:
     b.set(title="ทายจากส่วนต้นของคำ (ระหว่างพิมพ์)", xlabel="รอบการฝึก (epoch)")
     a.set_yscale("log")
     a.legend(fontsize=8)
-    fig.suptitle("รูปที่ 14: AI เก่งขึ้นทีละรอบ และหยุดดีขึ้นหลังรอบที่ 8")
+    fig.suptitle("AI เก่งขึ้นทีละรอบ และหยุดดีขึ้นหลังรอบที่ 8")
     fig.savefig(path)
     plt.close(fig)
 
@@ -89,7 +91,7 @@ def fig_pr(results: dict, target: str, path: Path) -> None:
     a.set(xlabel="จับได้กี่ % (recall)", ylabel="แก้ถูกกี่ % (precision)", title="ภาพรวม", ylim=(0.5, 1.005))
     b.set(xlabel="จับได้กี่ % (recall)", title="ขยายมุมขวาบน", xlim=(0.85, 1.002), ylim=(0.98, 1.0005))
     a.legend(fontsize=8, loc="lower left")
-    fig.suptitle(f"รูปที่ 16: แก้ถูกกี่ % เทียบกับจับได้กี่ % (ข้อสอบจริง)  ● = เกณฑ์ที่เลือก (เป้า {float(target):.1%})",
+    fig.suptitle(f"แก้ถูกกี่ % เทียบกับจับได้กี่ % (ข้อสอบจริง)  ● = เกณฑ์ที่เลือก (เป้า {float(target):.1%})",
                  fontsize=10)
     fig.savefig(path)
     plt.close(fig)
@@ -102,12 +104,14 @@ def fig_chars(results: dict, targets: list[str], path: Path) -> None:
             if target not in r["targets"]:
                 continue
             cdf = r["targets"][target]["test"]["chars_to_detect"]["cdf"][:16]
-            ax.plot(range(1, len(cdf) + 1), cdf, color=COLORS[m], label=LABELS[m], marker="o", ms=3, lw=1.8)
+            style = {"lw": 1.8, "marker": "o", "ms": 3, **STYLE.get(m, {})}
+            ax.plot(range(1, len(cdf) + 1), cdf, color=COLORS[m], label=LABELS[m], **style)
         ax.set(title=f"เป้าแก้ถูก {float(target):.1%}", xlabel="จำนวนตัวอักษรที่พิมพ์ไปแล้ว", xticks=range(1, 17, 1),
                ylim=(0, 1.0))
     axes[0][0].set_ylabel("% ของคำที่พิมพ์ผิดแป้น ที่จับได้แล้ว")
-    axes[0][0].legend(fontsize=8, loc="lower right")
-    fig.suptitle("รูปที่ 17: ต้องพิมพ์กี่ตัวถึงรู้ว่าพิมพ์ผิดแป้น (เฉพาะการแก้ระหว่างพิมพ์)")
+    axes[0][0].legend(fontsize=8, loc="center right")
+    fig.suptitle("ต้องพิมพ์กี่ตัวถึงรู้ว่าพิมพ์ผิดแป้น (เฉพาะการแก้ระหว่างพิมพ์)\n"
+                 "CNN (เส้นทึบ) กับ GRU (เส้นประ) เกือบทับกัน", fontsize=11)
     fig.savefig(path)
     plt.close(fig)
 
@@ -132,7 +136,7 @@ def fig_latency(path: Path) -> str | None:
     ax.set(xticks=x, xticklabels=[LABELS[m].split(" (")[0] for m in ms], ylabel="มิลลิวินาทีต่อการกด 1 ปุ่ม",
            yscale="log")
     ax.legend(fontsize=8, loc="upper left")
-    ax.set_title(f"รูปที่ 19: ความเร็ว (CPU 1 thread)\n{lat['machine']['cpu']}", fontsize=10)
+    ax.set_title(f"ความเร็ว (CPU 1 thread)\n{lat['machine']['cpu']}", fontsize=10)
     fig.savefig(path)
     plt.close(fig)
     return f.name
@@ -151,7 +155,7 @@ def fig_confusion(result: dict, target: str, path: Path) -> None:
                     color="white" if share[i, j] > 0.5 else "black")
     ax.set(xticks=[0, 1], xticklabels=["ไม่แก้", "แก้"], yticks=[0, 1],
            yticklabels=["พิมพ์ถูกอยู่แล้ว", "พิมพ์ผิดแป้น"], xlabel="โปรแกรมตัดสิน", ylabel="ความจริง")
-    ax.set_title(f"รูปที่ 20: ทายถูก/ทายผิดของ {LABELS[result['model']]} (เป้า {float(target):.1%})", fontsize=10)
+    ax.set_title(f"ทายถูก/ทายผิดของ {LABELS[result['model']]} (เป้า {float(target):.1%})", fontsize=10)
     fig.savefig(path)
     plt.close(fig)
 

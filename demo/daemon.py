@@ -161,15 +161,24 @@ class UinputInjector:
     def __init__(self, ui: UInput, key_delay: float, switch_delay: float, cinnamon: CinnamonLayout | None):
         self.ui, self.key_delay, self.switch_delay, self.cinnamon = ui, key_delay, switch_delay, cinnamon
 
-    def _tap(self, code: int, mods: tuple[int, ...] = ()) -> None:
-        for m in mods:
-            self.ui.write(e.EV_KEY, m, 1)
-        self.ui.write(e.EV_KEY, code, 1)
-        self.ui.write(e.EV_KEY, code, 0)
-        for m in reversed(mods):
-            self.ui.write(e.EV_KEY, m, 0)
+    def _key(self, code: int, value: int) -> None:
+        self.ui.write(e.EV_KEY, code, value)
         self.ui.syn()
-        time.sleep(self.key_delay)  # some apps drop events that arrive too fast
+        time.sleep(self.key_delay)
+
+    def _tap(self, code: int, mods: tuple[int, ...] = ()) -> None:
+        """Press and release like a person: each change in its own report, with time in between.
+
+        Press and release in one report (zero-length key press) worked in xed but Brave's address
+        bar dropped some of them: the BackSpaces deleted only part of the word, the retyped keys
+        never appeared.
+        """
+        for m in mods:
+            self._key(m, 1)
+        self._key(code, 1)
+        self._key(code, 0)
+        for m in reversed(mods):
+            self._key(m, 0)
 
     def backspace(self, n: int) -> None:
         for _ in range(n):
@@ -265,7 +274,8 @@ def main() -> None:
     p.add_argument("--dry-run", action="store_true", help="only print what would be fixed")
     p.add_argument("--setup", action="store_true", help="bind Super+Alt+1/2 to English/Thai via gsettings")
     p.add_argument("-v", "--verbose", action="store_true", help="print the model score after every key")
-    p.add_argument("--key-delay", type=float, default=0.004)
+    p.add_argument("--key-delay", type=float, default=0.008,
+                   help="seconds between injected key presses and releases (raise it if an app drops keys)")
     p.add_argument("--switch-delay", type=float, default=0.15)
     args = p.parse_args()
 

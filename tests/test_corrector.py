@@ -1,5 +1,3 @@
-"""Corrector against a simulated desktop: what ends up on screen after typing, not just which calls ran."""
-
 import pytest
 
 from luem import corrector as c
@@ -8,13 +6,14 @@ from luem.layout import char_to_key, key_to_char
 
 
 class Desktop:
-    """Fake app + keyboard layout. Physical keys and injected keys both land on `screen`."""
 
     def __init__(self, layout="en"):
         self.layout, self.screen, self.ops = layout, "", []
 
     def _type(self, code, shift):
-        self.screen += " " if code == c.KEY_SPACE else key_to_char(code, shift, self.layout)
+        self.screen += (
+            " " if code == c.KEY_SPACE else key_to_char(code, shift, self.layout)
+        )
 
     # Injector interface
     def backspace(self, n):
@@ -43,7 +42,11 @@ class Model:
 
 def setup(scores=None, default=0.0, desktop_layout="en", **th):
     d = Desktop(desktop_layout)
-    k = Corrector(Model(scores, default), d, Thresholds(**{"k_min": 1, "tau_type": 0.999, "tau_space": 0.96, **th}))
+    k = Corrector(
+        Model(scores, default),
+        d,
+        Thresholds(**{"k_min": 1, "tau_type": 0.999, "tau_space": 0.96, **th}),
+    )
     return d, k
 
 
@@ -68,7 +71,6 @@ def press(d, k, code, shift=False, mods=(), flush=True):
 
 
 def type_meaning(d, k, word, meant_layout, flush=True):
-    """Press the keys that would produce `word` in `meant_layout` (whatever layout is really active)."""
     for ch in word:
         if ch == " ":
             press(d, k, c.KEY_SPACE, flush=flush)
@@ -81,8 +83,27 @@ SUPER_ALT = (c.KEY_LEFTMETA, c.KEY_LEFTALT)
 
 def test_keycodes_match_evdev():
     e = pytest.importorskip("evdev.ecodes")
-    for name in ("ESC", "1", "2", "BACKSPACE", "TAB", "P", "ENTER", "LEFTCTRL", "F", "LEFTSHIFT", "RIGHTSHIFT",
-                 "LEFTALT", "SPACE", "CAPSLOCK", "KPENTER", "RIGHTCTRL", "RIGHTALT", "LEFTMETA", "RIGHTMETA"):
+    for name in (
+        "ESC",
+        "1",
+        "2",
+        "BACKSPACE",
+        "TAB",
+        "P",
+        "ENTER",
+        "LEFTCTRL",
+        "F",
+        "LEFTSHIFT",
+        "RIGHTSHIFT",
+        "LEFTALT",
+        "SPACE",
+        "CAPSLOCK",
+        "KPENTER",
+        "RIGHTCTRL",
+        "RIGHTALT",
+        "LEFTMETA",
+        "RIGHTMETA",
+    ):
         assert getattr(c, f"KEY_{name}") == getattr(e, f"KEY_{name}"), name
 
 
@@ -96,7 +117,11 @@ def test_fix_while_typing():
     d, k = setup({"l;y": 0.9995})  # meant สวัสดี, layout was en
     type_meaning(d, k, "สวัสดี", "th")
     assert d.screen == "สวัสดี" and d.layout == "th" and k.layout == "th"
-    assert d.ops == [("backspace", 3), ("layout", "th"), ("keys", 3)]  # fixed after 3 keys, then typed on
+    assert d.ops == [
+        ("backspace", 3),
+        ("layout", "th"),
+        ("keys", 3),
+    ]  # fixed after 3 keys, then typed on
 
 
 def test_fix_on_space_also_retypes_the_space():
@@ -125,7 +150,7 @@ def test_manual_fix_converts_last_word_and_undoes():
     type_meaning(d, k, "l;ylfu ", "en")
     press(d, k, c.KEY_F, mods=SUPER_ALT)
     assert d.screen == "สวัสดี " and d.layout == "th"
-    press(d, k, c.KEY_F, mods=SUPER_ALT)      # pressing again undoes a wrong conversion
+    press(d, k, c.KEY_F, mods=SUPER_ALT)  # pressing again undoes a wrong conversion
     assert d.screen == "l;ylfu " and d.layout == "en"
 
 
@@ -139,11 +164,11 @@ def test_manual_fix_mid_word():
 
 def test_backspace_over_space_returns_to_previous_word():
     d, k = setup({"l;ylfu": 0.97})
-    k.th.tau_space = 0.99                     # Space does not fire
+    k.th.tau_space = 0.99  # Space does not fire
     type_meaning(d, k, "l;ylfu ", "en")
     press(d, k, c.KEY_BACKSPACE)
     k.th.tau_space = 0.96
-    press(d, k, c.KEY_SPACE)                  # back in the word: Space checks it again
+    press(d, k, c.KEY_SPACE)  # back in the word: Space checks it again
     assert d.screen == "สวัสดี "
 
 
@@ -158,10 +183,10 @@ def test_mouse_click_forgets_the_word():
 def test_shortcut_and_enter_reset():
     d, k = setup({"l;ylfu": 0.97})
     type_meaning(d, k, "l;yl", "en")
-    press(d, k, char_to_key("a", "en")[0], mods=(c.KEY_LEFTCTRL,))  # Ctrl+A
+    press(d, k, char_to_key("a", "en")[0], mods=(c.KEY_LEFTCTRL,))
     type_meaning(d, k, "fu", "en")
     press(d, k, c.KEY_SPACE)
-    assert d.ops == []                        # only "fu" was in the buffer
+    assert d.ops == []
 
 
 def test_user_layout_keys_update_tracking():
@@ -198,11 +223,14 @@ def test_dry_run_reports_but_never_touches_text():
 
 # --- found on the real desktop: typing "hello" with th active gave "lheo" (fix ran while keys were held)
 
+
 def test_fix_waits_for_release_and_includes_keys_typed_meanwhile():
     d, k = setup({"้ำส": 0.9999}, desktop_layout="th")
     k.layout = "th"
-    type_meaning(d, k, "hell", "en", flush=False)   # fast typing: never a moment with no key held
-    assert d.ops == []                              # decided at "hel" but nothing injected yet
+    type_meaning(
+        d, k, "hell", "en", flush=False
+    )  # fast typing: never a moment with no key held
+    assert d.ops == []  # decided at "hel" but nothing injected yet
     k.flush()
     type_meaning(d, k, "o", "en")
     assert d.screen == "hello"
@@ -215,7 +243,7 @@ def test_manual_fix_not_injected_while_hotkey_held():
     for m in SUPER_ALT:
         k.on_key(m, 1)
     k.on_key(c.KEY_F, 1)
-    assert d.ops == []          # Super+Alt still down: injecting now would send shortcuts
+    assert d.ops == []  # Super+Alt still down: injecting now would send shortcuts
     k.on_key(c.KEY_F, 0)
     for m in SUPER_ALT:
         k.on_key(m, 0)
@@ -227,7 +255,9 @@ def test_space_fix_dropped_when_next_word_started_before_flush():
     d, k = setup({"l;ylfu": 0.97})
     type_meaning(d, k, "l;ylfu", "en")
     press(d, k, c.KEY_SPACE, flush=False)
-    type_meaning(d, k, "a", "en", flush=False)      # next word already on screen: deleting is unsafe
+    type_meaning(
+        d, k, "a", "en", flush=False
+    )  # next word already on screen: deleting is unsafe
     k.flush()
     assert d.ops == [] and d.screen == "l;ylfu a"
 
@@ -240,12 +270,10 @@ def test_backspace_cancels_pending_fix():
     assert d.ops == []
 
 
-# --- found on the real desktop: screen showed "l;l;" while the daemon thought Thai was active
-
 def test_desktop_reported_layout_wins_over_counting():
     d, k = setup()
-    k.layout = "th"                             # our guess drifted
-    k.on_layout("en")                           # Cinnamon says what is really active
+    k.layout = "th"  # our guess drifted
+    k.on_layout("en")  # Cinnamon says what is really active
     assert k.layout == "en"
     type_meaning(d, k, "l;l;", "en")
     assert [e.detail for e in k.log if e.kind == "score"][-1] == "l;l;"
@@ -256,7 +284,7 @@ def test_held_shortcut_autorepeat_is_not_counted_again():
     k.on_key(c.KEY_LEFTMETA, 1)
     k.on_key(c.KEY_SPACE, 1)
     for _ in range(5):
-        k.on_key(c.KEY_SPACE, 2)                # Super+Space held down
+        k.on_key(c.KEY_SPACE, 2)  # Super+Space held down
     k.on_key(c.KEY_SPACE, 0)
     k.on_key(c.KEY_LEFTMETA, 0)
     assert k.layout == "th"
@@ -268,11 +296,14 @@ def test_held_shortcut_autorepeat_is_not_counted_again():
 
 # --- found on the real desktop: "did u see" typed with th active; "u" (ี) was never fixed
 
+
 @pytest.mark.parametrize("word", ["u", "the", "he", "but"])
 def test_english_word_without_thai_consonant_is_fixed(word):
-    d, k = setup(desktop_layout="th")   # model abstains (0.0) on all of them
+    d, k = setup(desktop_layout="th")  # model abstains (0.0) on all of them
     k.layout = "th"
-    type_meaning(d, k, "ดี ", "th")     # any earlier word: we saw a Space, so a new word starts
+    type_meaning(
+        d, k, "ดี ", "th"
+    )  # any earlier word: we saw a Space, so a new word starts
     type_meaning(d, k, word, "en")
     assert d.screen.endswith(" " + word) and d.layout == "en"
 
@@ -281,7 +312,7 @@ def test_spelling_rule_not_used_after_click_into_a_word():
     d, k = setup(desktop_layout="th")
     k.layout = "th"
     type_meaning(d, k, "ดี ", "th")
-    k.on_click()                        # cursor may now be right after a Thai consonant
+    k.on_click()  # cursor may now be right after a Thai consonant
     type_meaning(d, k, "ี", "th")
     assert d.ops == []
 
@@ -292,13 +323,17 @@ def test_spelling_rule_not_used_mid_word_after_layout_toggle():
     type_meaning(d, k, "x ", "en")
     type_meaning(d, k, "ม", "th")
     press(d, k, c.KEY_SPACE, mods=(c.KEY_LEFTMETA,))
-    press(d, k, c.KEY_SPACE, mods=(c.KEY_LEFTMETA,))   # toggled away and back: "ม" still on screen
+    press(
+        d, k, c.KEY_SPACE, mods=(c.KEY_LEFTMETA,)
+    )  # toggled away and back: "ม" still on screen
     type_meaning(d, k, "ี", "th")
     assert d.ops == []
 
 
 def test_three_marks_in_a_row_fixed_even_after_click():
-    d, k = setup(desktop_layout="th")   # "the" typed right after clicking into a text box
+    d, k = setup(
+        desktop_layout="th"
+    )  # "the" typed right after clicking into a text box
     k.layout = "th"
     k.on_click()
     type_meaning(d, k, "the", "en")

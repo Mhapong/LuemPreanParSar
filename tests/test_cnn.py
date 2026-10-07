@@ -17,30 +17,45 @@ def net(request):
 
 
 def test_vocab_covers_both_layouts():
-    assert VOCAB_SIZE < 256  # train_cnn.py stores ids as uint8
-    assert 1 not in encode("l;ylfu") + encode("สวัสดี")  # no UNK for typeable text
+    assert VOCAB_SIZE < 256
+    assert 1 not in encode("l;ylfu") + encode("สวัสดี")
 
 
 def test_padded_prefix_scores_like_prefix_alone(net):
-    """Causal convs + masked pooling (CNN), last real state (GRU): PAD after a prefix changes nothing."""
     ids = encode("l;ylfu")
     with torch.no_grad():
-        batch = net(torch.tensor([encode("l;ylfu"[:k], len(ids)) for k in range(1, len(ids) + 1)]))
-        alone = torch.stack([net(torch.tensor([ids[:k]]))[0] for k in range(1, len(ids) + 1)])
+        batch = net(
+            torch.tensor(
+                [encode("l;ylfu"[:k], len(ids)) for k in range(1, len(ids) + 1)]
+            )
+        )
+        alone = torch.stack(
+            [net(torch.tensor([ids[:k]]))[0] for k in range(1, len(ids) + 1)]
+        )
     assert torch.allclose(batch, alone, atol=1e-6)
 
 
 def test_onnx_runtime_matches_torch(net, tmp_path):
     path = tmp_path / "cnn.onnx"
     model = WithSigmoid(net).eval()
-    torch.onnx.export(model, (torch.tensor([encode("abc")]),), str(path), input_names=["ids"],
-                      output_names=["p_wrong"], dynamic_axes={"ids": {0: "batch", 1: "length"}},
-                      opset_version=17, dynamo=False)
+    torch.onnx.export(
+        model,
+        (torch.tensor([encode("abc")]),),
+        str(path),
+        input_names=["ids"],
+        output_names=["p_wrong"],
+        dynamic_axes={"ids": {0: "batch", 1: "length"}},
+        opset_version=17,
+        dynamo=False,
+    )
     runtime = CNNModel(path)
     text = "l;ylfu"
     with torch.no_grad():
-        ref = [model(torch.tensor([encode(text[:k])])).item() for k in range(1, len(text) + 1)]
+        ref = [
+            model(torch.tensor([encode(text[:k])])).item()
+            for k in range(1, len(text) + 1)
+        ]
     assert np.allclose(runtime.predict_prefixes(text), ref, atol=1e-5)
     assert runtime.predict(text) == pytest.approx(ref[-1], abs=1e-5)
     assert runtime.predict("555") == 0.0
-    assert runtime.predict_prefixes("(abc")[0] == 0.0  # "(" alone: no evidence yet
+    assert runtime.predict_prefixes("(abc")[0] == 0.0

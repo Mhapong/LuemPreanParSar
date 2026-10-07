@@ -1,20 +1,12 @@
-"""Two-moment evaluation: fix while typing (stage A) and on Space (stage B).
-
-Per sample we have the model's score for every prefix while the user types it:
-    stage A fires at the first prefix k >= k_min with score >= tau_type
-    stage B fires on Space (full chunk) with score >= tau_space, if A did not fire
-A fix on an "ok" sample is a false fix: the user typed correctly and we broke it.
-Thresholds are chosen on val, then frozen and reported on test.
-"""
-
 from dataclasses import asdict, dataclass
 
 import numpy as np
 
-# Candidate thresholds: dense near 1, where high-precision operating points live
-TAUS = np.unique(np.concatenate([np.linspace(0.5, 0.99, 50), 1 - np.logspace(-2, -9, 36)]))
+TAUS = np.unique(
+    np.concatenate([np.linspace(0.5, 0.99, 50), 1 - np.logspace(-2, -9, 36)])
+)
 K_RANGE = range(1, 7)
-DISABLED = 2.0  # a threshold no score can reach
+DISABLED = 2.0
 
 
 @dataclass
@@ -25,8 +17,9 @@ class Thresholds:
 
 
 def suffix_max(prefix_scores: list[list[float]], k_min: int) -> np.ndarray:
-    """Highest score over prefixes k >= k_min: stage A fires iff this >= tau_type."""
-    return np.array([max(s[k_min - 1:]) if len(s) >= k_min else 0.0 for s in prefix_scores])
+    return np.array(
+        [max(s[k_min - 1 :]) if len(s) >= k_min else 0.0 for s in prefix_scores]
+    )
 
 
 def _prec_rec(fire: np.ndarray, y: np.ndarray) -> tuple[float, float]:
@@ -35,9 +28,9 @@ def _prec_rec(fire: np.ndarray, y: np.ndarray) -> tuple[float, float]:
     return (tp / n_fire if n_fire else 1.0), tp / max(1, int(y.sum()))
 
 
-def select_thresholds(y: np.ndarray, prefix_scores: list[list[float]], target: float = 0.99) -> Thresholds:
-    """Stage A: (k_min, tau_type) with the highest recall while precision >= target.
-    Stage B: tau_space adding the most recall while overall precision stays >= target."""
+def select_thresholds(
+    y: np.ndarray, prefix_scores: list[list[float]], target: float = 0.99
+) -> Thresholds:
     y = y.astype(bool)
     best_a = (-1.0, Thresholds(K_RANGE[-1], DISABLED, DISABLED))
     for k in K_RANGE:
@@ -58,7 +51,6 @@ def select_thresholds(y: np.ndarray, prefix_scores: list[list[float]], target: f
 
 
 def first_fire(scores: list[float], k_min: int, tau: float) -> int | None:
-    """1-based prefix length at which stage A fires, or None."""
     for k in range(k_min, len(scores) + 1):
         if scores[k - 1] >= tau:
             return k
@@ -66,7 +58,6 @@ def first_fire(scores: list[float], k_min: int, tau: float) -> int | None:
 
 
 def average_precision(y: np.ndarray, score: np.ndarray) -> float:
-    """Area under the precision-recall curve (threshold-free comparison of models)."""
     order = np.argsort(-score, kind="stable")
     y = y[order].astype(bool)
     tp = np.cumsum(y)
@@ -78,20 +69,29 @@ def pr_curve(y: np.ndarray, score: np.ndarray, points: int = 60) -> list[dict]:
     out = []
     for tau in np.quantile(score, np.linspace(0, 1, points)):
         prec, rec = _prec_rec(score >= tau, y.astype(bool))
-        out.append({"tau": round(float(tau), 6), "precision": round(prec, 5), "recall": round(rec, 5)})
+        out.append(
+            {
+                "tau": round(float(tau), 6),
+                "precision": round(prec, 5),
+                "recall": round(rec, 5),
+            }
+        )
     return out
 
 
 def precision_at_base_rate(recall: float, fpr: float, base_rate: float) -> float:
-    """Bayes: precision if only `base_rate` of real typing were wrong-layout (our data is ~50/50)."""
     hit, false = recall * base_rate, fpr * (1 - base_rate)
     return hit / (hit + false) if hit + false else 1.0
 
 
-def evaluate(rows: list[dict], prefix_scores: list[list[float]], th: Thresholds) -> dict:
+def evaluate(
+    rows: list[dict], prefix_scores: list[list[float]], th: Thresholds
+) -> dict:
     y = np.array([r["label"] == "wrong" for r in rows])
     hard = np.array([r["kind"] == "hard_negative" for r in rows])
-    th_intended = np.array([r["active"] == "en" and r["label"] == "wrong" for r in rows])  # meant Thai
+    th_intended = np.array(
+        [r["active"] == "en" and r["label"] == "wrong" for r in rows]
+    )  # meant Thai
     full = np.array([s[-1] for s in prefix_scores])
 
     fire_k = [first_fire(s, th.k_min, th.tau_type) for s in prefix_scores]
@@ -104,28 +104,42 @@ def evaluate(rows: list[dict], prefix_scores: list[list[float]], th: Thresholds)
     fpr = float((fire & ok).sum() / max(1, ok.sum()))
     chars = np.array([k for k, wrong in zip(fire_k, y) if wrong and k is not None])
     n_wrong = int(y.sum())
-    # fraction of all wrong samples already caught after typing k characters (stage A only)
     cdf = [round(float((chars <= k).sum() / max(1, n_wrong)), 5) for k in range(1, 33)]
 
     return {
         "thresholds": asdict(th),
-        "n": len(rows), "n_wrong": n_wrong,
-        "confusion": {"tp": int((fire & y).sum()), "fp": int((fire & ok).sum()),
-                      "fn": int((~fire & y).sum()), "tn": int((~fire & ok).sum())},
+        "n": len(rows),
+        "n_wrong": n_wrong,
+        "confusion": {
+            "tp": int((fire & y).sum()),
+            "fp": int((fire & ok).sum()),
+            "fn": int((~fire & y).sum()),
+            "tn": int((~fire & ok).sum()),
+        },
         "precision": round(prec, 5),
         "recall": round(rec, 5),
         "f1": round(2 * prec * rec / (prec + rec), 5) if prec + rec else 0.0,
         "recall_while_typing": round(float((fire_a & y).sum() / max(1, n_wrong)), 5),
         "recall_on_space": round(float((fire_b & y).sum() / max(1, n_wrong)), 5),
         "false_fix_rate": round(fpr, 6),
-        "false_fix_rate_hard_negatives": round(float((fire & hard).sum() / max(1, hard.sum())), 6),
-        "recall_meant_thai": round(float((fire & th_intended).sum() / max(1, th_intended.sum())), 5),
-        "recall_meant_english": round(float((fire & y & ~th_intended).sum() / max(1, (y & ~th_intended).sum())), 5),
-        "precision_at_base_rate": {str(b): round(precision_at_base_rate(rec, fpr, b), 5) for b in (0.02, 0.05, 0.1)},
+        "false_fix_rate_hard_negatives": round(
+            float((fire & hard).sum() / max(1, hard.sum())), 6
+        ),
+        "recall_meant_thai": round(
+            float((fire & th_intended).sum() / max(1, th_intended.sum())), 5
+        ),
+        "recall_meant_english": round(
+            float((fire & y & ~th_intended).sum() / max(1, (y & ~th_intended).sum())), 5
+        ),
+        "precision_at_base_rate": {
+            str(b): round(precision_at_base_rate(rec, fpr, b), 5)
+            for b in (0.02, 0.05, 0.1)
+        },
         "chars_to_detect": {
             "median": float(np.median(chars)) if len(chars) else None,
             "mean": round(float(chars.mean()), 3) if len(chars) else None,
-            "caught_by_3_chars": cdf[2], "caught_by_5_chars": cdf[4],
+            "caught_by_3_chars": cdf[2],
+            "caught_by_5_chars": cdf[4],
             "cdf": cdf,
         },
         "average_precision_full_text": round(average_precision(y, full), 5),

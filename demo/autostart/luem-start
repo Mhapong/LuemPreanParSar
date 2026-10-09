@@ -1,0 +1,5 @@
+#!/bin/sh
+cd "$(dirname "$0")/../.." || exit 1
+UV="$(command -v uv || echo "$HOME/.local/bin/uv")"
+mkdir -p "$HOME/.cache"
+exec "$UV" run --extra demo python demo/daemon.py "$@" >> "$HOME/.cache/luem.log" 2>&1

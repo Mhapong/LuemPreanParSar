@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=LuemPreanParSar
+Comment=Fix text typed in the wrong keyboard layout
+Exec=@REPO@/demo/autostart/luem-start
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=5

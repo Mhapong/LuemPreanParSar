@@ -30,3 +30,46 @@ uv run python scripts/verify_layout.py    # ตรวจว่าตาราง
 ```
 
 ใส่ `uv run` นำหน้าคำสั่งเสมอ ไม่ต้อง activate `.venv` เอง
+
+## ให้โปรแกรมเปิดเองทุกครั้งที่เปิดเครื่อง (Linux Mint)
+
+ทำครั้งเดียวในเครื่อง Linux ที่จะใช้งานจริง หลังจากนี้ทุกครั้งที่ login เข้าเครื่อง โปรแกรมจะเริ่มทำงานเองโดยไม่ต้องเปิด terminal
+
+**1. ลองรันเองก่อน 1 ครั้ง** ให้แน่ใจว่าโปรแกรมทำงานได้
+
+```fish
+uv sync --extra demo
+uv run --extra demo python demo/daemon.py --setup   # ครั้งแรกเท่านั้น: ตั้งปุ่มลัดเลือกภาษา
+```
+
+ลองพิมพ์ผิดภาษาดู ถ้าโปรแกรมแก้ให้ได้ กด `Ctrl+C` ปิด แล้วทำข้อ 2 ต่อ
+
+**2. ตั้งให้เปิดเองตอน login** รันในโฟลเดอร์ของโปรเจกต์:
+
+```fish
+mkdir -p ~/.config/autostart
+sed "s|@REPO@|$PWD|" demo/autostart/luem.desktop > ~/.config/autostart/luem.desktop
+```
+
+**3. ทดสอบ** ให้ log out แล้ว login ใหม่ จากนั้นลองพิมพ์ผิดภาษาดู
+
+| อยากทำอะไร | ทำอย่างไร |
+|---|---|
+| หยุดชั่วคราว / ให้กลับมาทำงานต่อ | กด `Super+Alt+P` |
+| ปิดโปรแกรมจนกว่าจะเปิดเครื่องครั้งหน้า | `pkill -f demo/daemon.py` |
+| เลิกให้เปิดเองตอนเปิดเครื่อง | เมนู → **Startup Applications** → ปิด LuemPreanParSar (หรือลบไฟล์ `~/.config/autostart/luem.desktop`) |
+| ดูว่าโปรแกรมทำงานอยู่ไหม / มี error อะไร | `pgrep -af daemon.py` และ `tail -f ~/.cache/luem.log` |
+
+> ถ้าย้ายโฟลเดอร์โปรเจกต์ไปที่อื่น ต้องทำข้อ 2 ใหม่
+
+<details>
+<summary>รายละเอียดทางเทคนิค</summary>
+
+- `demo/autostart/luem.desktop` เป็น autostart entry ตามมาตรฐาน freedesktop ซึ่ง Cinnamon อ่านจาก `~/.config/autostart/` ตอนเริ่ม session ส่วนคำสั่ง `sed` จะแทน `@REPO@` ด้วย path จริงของโปรเจกต์ เพราะช่อง `Exec=` ต้องเป็น path เต็ม
+- ตั้งให้รอ 5 วินาทีหลัง login (`X-GNOME-Autostart-Delay=5`) เพื่อให้ Cinnamon พร้อมก่อน เพราะ daemon ต้องอ่านภาษาปัจจุบันจาก D-Bus ของ Cinnamon และต้องรันใน session ของผู้ใช้ จึงทำเป็น system service ที่รันก่อน login ไม่ได้
+- `demo/autostart/luem-start` จะ `cd` เข้าโฟลเดอร์โปรเจกต์ หา `uv` ใน PATH (ถ้าไม่เจอจะใช้ `~/.local/bin/uv`) แล้วรัน daemon โดยเขียน output ต่อท้าย `~/.cache/luem.log`
+- ถ้า daemon crash ระหว่างใช้งาน มันจะไม่เปิดเองใหม่จนกว่าจะ login รอบหน้า
+- ถ้า log ขึ้น `cannot open /dev/uinput` แปลว่าผู้ใช้ยังไม่มีสิทธิ์เข้าถึง `/dev/uinput` และ `/dev/input/*` ต้องตั้ง udev rule ก่อน
+
+</details>
+

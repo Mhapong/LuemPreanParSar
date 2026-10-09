@@ -1,17 +1,3 @@
-"""Spike: do Cinnamon's "switch to input source N" shortcuts select a layout absolutely?
-
-Run in a terminal, then don't touch the keyboard or mouse for ~10 s:
-    uv run --extra demo python demo/spike_layout_keys.py
-
-Needs the shortcuts bound first (once):
-    gsettings set org.cinnamon.desktop.keybindings.wm switch-input-source-0 "['<Super><Alt>1']"
-    gsettings set org.cinnamon.desktop.keybindings.wm switch-input-source-1 "['<Super><Alt>2']"
-
-How it reads the real layout: after each shortcut it injects KEY_F through uinput into this
-(focused) terminal and reads what arrives on stdin: "f" means en is active, "ด" means th.
-Throwaway code.
-"""
-
 import os
 import select
 import sys
@@ -25,7 +11,6 @@ PROBE_TIMEOUT = 1.0
 
 
 def press(ui: UInput, *keys: int) -> None:
-    """Press keys in order (modifiers first), release in reverse."""
     for k in keys:
         ui.write(e.EV_KEY, k, 1)
         ui.syn()
@@ -34,7 +19,7 @@ def press(ui: UInput, *keys: int) -> None:
         ui.write(e.EV_KEY, k, 0)
         ui.syn()
         time.sleep(0.02)
-    time.sleep(0.3)  # let the compositor apply a layout change
+    time.sleep(0.3)
 
 
 def drain() -> None:
@@ -43,7 +28,6 @@ def drain() -> None:
 
 
 def probe(ui: UInput) -> str:
-    """Type KEY_F into this terminal and see which character arrives."""
     drain()
     press(ui, e.KEY_F)
     deadline = time.time() + PROBE_TIMEOUT
@@ -54,7 +38,7 @@ def probe(ui: UInput) -> str:
             try:
                 text = buf.decode("utf-8")
             except UnicodeDecodeError:
-                continue  # "ด" is 3 bytes; wait for the rest
+                continue
             return {"f": "en", "ด": "th"}.get(text, f"?{text!r}")
     return "none (no key arrived: is this terminal focused?)"
 
@@ -77,8 +61,8 @@ def main() -> None:
     ui = UInput(name="luem-spike-layout")
     results = []
     try:
-        tty.setcbreak(sys.stdin.fileno())  # read keys one by one, no echo
-        time.sleep(1.0)  # give the compositor time to register the new virtual keyboard
+        tty.setcbreak(sys.stdin.fileno())
+        time.sleep(1.0)
         results.append(("start", probe(ui), None))
         for label, keys, expect in STEPS:
             press(ui, *keys)

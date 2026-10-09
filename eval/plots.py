@@ -1,15 +1,3 @@
-"""Figures and the comparison table for the report (docs/FIGURES.md numbers), from eval/results only.
-
-Usage:
-    uv run python eval/plots.py                  # main operating point: target 0.999
-    uv run python eval/plots.py --target 0.99
-
-Needs eval/evaluate.py (results + scores/) and, for the latency figure, eval/latency.py
-(the Linux notebook's numbers are preferred over the training PC's).
-Writes docs/figures/fig14_training.png, fig16_pr.png, fig17_chars.png, fig19_latency.png,
-fig20_confusion.png and eval/results/summary.md (figure 18, Thai table to paste into the report).
-"""
-
 import argparse
 import json
 from pathlib import Path
@@ -17,25 +5,23 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.font_manager as fm  # noqa: E402
-import matplotlib.pyplot as plt  # noqa: E402
-import numpy as np  # noqa: E402
+import matplotlib.font_manager as fm
+import matplotlib.pyplot as plt
+import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "eval" / "results"
 FIGURES = ROOT / "docs" / "figures"
 MODELS = ("dictionary", "ngram", "cnn", "gru")
 LABELS = {"dictionary": "พจนานุกรม", "ngram": "สถิติกลุ่มตัวอักษร (n-gram)", "cnn": "CNN", "gru": "GRU"}
-# dataviz reference palette (colorblind-checked); the dictionary baseline stays gray on purpose
 COLORS = {"dictionary": "#8a8985", "ngram": "#eb6834", "cnn": "#2a78d6", "gru": "#1baf7a"}
-STYLE = {"cnn": {"lw": 2.6, "zorder": 4}, "gru": {"lw": 1.6, "ls": "--", "zorder": 5}}  # GRU dashed on top: CNN shows through
+STYLE = {"cnn": {"lw": 2.6, "zorder": 4}, "gru": {"lw": 1.6, "ls": "--", "zorder": 5}}
 RUNS = {"cnn_a_base": "CNN (ใช้จริง)", "cnn_b_hard3": "CNN น้ำหนักตัวอย่างหลอก x3",
         "cnn_c_wide": "CNN ขนาดใหญ่ขึ้น", "gru": "GRU"}
 THAI_FONTS = ("Leelawadee UI", "Tahoma", "Noto Sans Thai", "Noto Sans Thai Looped", "Loma", "Garuda", "Sarabun")
 
 
 def setup_fonts() -> None:
-    """Latin first, then the first installed Thai font as a per-glyph fallback (matplotlib >= 3.6)."""
     installed = {f.name for f in fm.fontManager.ttflist}
     thai = [f for f in THAI_FONTS if f in installed]
     if not thai:
@@ -85,7 +71,7 @@ def fig_pr(results: dict, target: str, path: Path) -> None:
         for ax in (a, b):
             ax.plot(rec, prec, color=COLORS[m], label=LABELS[m], lw=1.8)
         t = r["targets"][target]["test"]
-        if t["recall"] > 0:  # a model that never fixes anything has no operating point to mark
+        if t["recall"] > 0:
             for ax in (a, b):
                 ax.plot(t["recall"], t["precision"], "o", color=COLORS[m], mec="black", ms=7, zorder=5)
     a.set(xlabel="จับได้กี่ % (recall)", ylabel="แก้ถูกกี่ % (precision)", title="ภาพรวม", ylim=(0.5, 1.005))

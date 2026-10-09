@@ -6,16 +6,13 @@ requires-python = ">=3.12"
 dependencies = []
 
 [project.optional-dependencies]
-# Add as each phase starts (see docs/IMPLEMENTATION_PLAN.md)
 data = ["datasets", "pythainlp"]
 ml = ["numpy", "torch", "onnx", "onnxruntime", "matplotlib"]
 demo = ["evdev; sys_platform == 'linux'", "onnxruntime", "numpy"]
 
 [dependency-groups]
-dev = ["pytest", "numpy", "matplotlib"]  # numpy: metrics/eval; matplotlib: eval/plots.py without the heavy ml extra
+dev = ["pytest", "numpy", "matplotlib"]
 
-# torch from PyPI is CPU-only on Windows: take the CUDA build there (training PC, RTX 3070),
-# and the small CPU build on the Linux notebook (dev + latency measurement)
 [tool.uv.sources]
 torch = [
     { index = "pytorch-cu128", marker = "sys_platform == 'win32'" },

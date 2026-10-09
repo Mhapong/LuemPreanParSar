@@ -16,7 +16,6 @@ SPLIT_FRACTION = {"train": 0.8, "val": 0.1, "test": 0.1}
 
 
 def reservoir_chunks(path: Path, cap: int, rng: random.Random):
-    """Uniform sample of at most cap*fraction chunks per split, plus document/chunk counts."""
     caps = {s: max(1, int(cap * SPLIT_FRACTION[s])) for s in SPLITS}
     kept = {s: [] for s in SPLITS}
     seen = Counter()
@@ -45,7 +44,6 @@ def reservoir_chunks(path: Path, cap: int, rng: random.Random):
 
 
 def english_words(samples: list) -> list[str]:
-    """Lowercase alphabetic words from English chunks, used to build realistic identifiers/URLs."""
     words = {
         c.lower()
         for c, script, _ in samples
@@ -142,7 +140,6 @@ def main() -> None:
             f"{split:5} {len(samples):>9,} samples -> {out} ({out.stat().st_size / 1e6:.1f} MB)"
         )
 
-    # How often is a wrong-layout string also a real, correctly typed chunk? (irreducible ambiguity)
     train = per_split["train"]
     ok_texts = {s.text for s in train if s.label == "ok"}
     wrong = [s for s in train if s.label == "wrong"]

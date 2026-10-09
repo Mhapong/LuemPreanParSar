@@ -1,13 +1,3 @@
-"""Report figures that do not come from evaluation results (docs/FIGURES.md numbers 3, 10, 12).
-
-Usage:
-    uv run python eval/report_figures.py
-
-Writes docs/figures/fig03_keyboard.png (drawn from src/luem/layout.py, the table the project uses),
-fig10_dataset.png (from data/processed/stats.json) and fig12_cnn.png (CNN structure, sizes read
-from DEFAULT_CONFIG-equivalent numbers below and checked against the exported model).
-"""
-
 import json
 import unicodedata
 from pathlib import Path
@@ -15,30 +5,27 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.ticker import FuncFormatter  # noqa: E402
-from matplotlib.patches import FancyBboxPatch  # noqa: E402
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
+from matplotlib.patches import FancyBboxPatch
 
-from luem.layout import _EN_LOWER, _EN_UPPER, _TH_LOWER, _TH_UPPER  # noqa: E402
-from plots import FIGURES, ROOT, setup_fonts  # noqa: E402
+from luem.layout import _EN_LOWER, _EN_UPPER, _TH_LOWER, _TH_UPPER
+from plots import FIGURES, ROOT, setup_fonts
 
 THOUSANDS = FuncFormatter(lambda v, _: f"{v / 1000:,.0f}k" if v else "0")
 INK, MUTED, GRID = "#0b0b0b", "#52514e", "#d9d8d4"
-BLUE, ORANGE, AQUA = "#2a78d6", "#eb6834", "#1baf7a"   # dataviz reference palette, slots 1-3
+BLUE, ORANGE, AQUA = "#2a78d6", "#eb6834", "#1baf7a"
 BLUE_TINT, ORANGE_TINT = "#cde2fb", "#fde3d6"
 
 
 def show(ch: str) -> str:
-    """Thai vowels/tone marks are drawn on a dotted circle, as in dictionaries (alone they float)."""
     return "◌" + ch if unicodedata.combining(ch) else ch
 
 
-# ------------------------------------------------------------------ figure 3: keyboard
-
 def fig_keyboard(path: Path) -> None:
-    rows = [(0, 13), (13, 25), (25, 37), (37, 47)]      # slices of the 47-key strings
-    offsets = [0.0, 1.5, 1.8, 2.3]                       # row stagger, in key widths
-    example = set("l;yfu")                               # keys of "l;ylfu" -> สวัสดี
+    rows = [(0, 13), (13, 25), (25, 37), (37, 47)]
+    offsets = [0.0, 1.5, 1.8, 2.3]
+    example = set("l;yfu")
     fig, ax = plt.subplots(figsize=(14, 4.6))
     ax.set_xlim(-0.2, 16.4)
     ax.set_ylim(-0.35, 4.25)
@@ -57,7 +44,6 @@ def fig_keyboard(path: Path) -> None:
                     fontweight="bold")
             ax.text(x + 0.83, y + 0.72, show(_TH_UPPER[i]), color=MUTED, ha="right", va="center", **kw)
             ax.text(x + 0.83, y + 0.30, show(_TH_LOWER[i]), color=BLUE, ha="right", va="center", fontsize=13)
-    # legend key, drawn as one big key
     lx, ly, lw = 13.2, 0.05, 3.0
     ax.add_patch(FancyBboxPatch((lx, ly), lw, 0.9, boxstyle="round,pad=0,rounding_size=0.08", fc="white",
                                 ec="#b5b4af", lw=1.2))
@@ -74,8 +60,6 @@ def fig_keyboard(path: Path) -> None:
     plt.close(fig)
 
 
-# ------------------------------------------------------------------ figure 10: dataset
-
 SOURCE_LABELS = {"wiki_th": "Wikipedia ไทย", "wiki_en": "Wikipedia อังกฤษ", "wisesight": "Wisesight (แชท/โซเชียล)",
                  "synthetic": "ตัวอย่างหลอกที่สร้างเอง"}
 
@@ -86,7 +70,6 @@ def fig_dataset(path: Path) -> None:
     totals = {s: stats["splits"][s]["total"] for s in ("train", "val", "test")}
     fig, (a, b, c) = plt.subplots(1, 3, figsize=(14, 4.2), gridspec_kw={"width_ratios": [1.15, 1, 1.25]})
 
-    # (a) where the training text comes from
     src = sorted(train["source"].items(), key=lambda kv: kv[1])
     ys = range(len(src))
     a.barh(ys, [v for _, v in src], color=BLUE, height=0.6)
@@ -99,7 +82,6 @@ def fig_dataset(path: Path) -> None:
     a.xaxis.set_major_formatter(THOUSANDS)
     a.grid(axis="y", visible=False)
 
-    # (b) balance: active layout x label
     al = train["active_label"]
     x = [0, 1]
     ok = [al["en/ok"], al["th/ok"]]
@@ -117,7 +99,6 @@ def fig_dataset(path: Path) -> None:
     b.set_title("(ข) สมดุลของเฉลย (ข้อมูลฝึก)", loc="left", fontsize=10)
     b.grid(axis="x", visible=False)
 
-    # (c) length distribution
     hist = train["len_hist"]
     labels = list(hist)
     vals = [hist[k] for k in labels]
@@ -136,8 +117,6 @@ def fig_dataset(path: Path) -> None:
     fig.savefig(path)
     plt.close(fig)
 
-
-# ------------------------------------------------------------------ figure 12: CNN
 
 CNN = {"emb": 32, "channels": 96, "kernels": (2, 3, 4, 5), "hidden": 128, "max_len": 32}
 
@@ -164,7 +143,7 @@ def arrow(ax, x0, y0, x1, y1):
 
 
 def fig_cnn(path: Path) -> None:
-    from luem.models.cnn import VOCAB_SIZE  # noqa: PLC0415 (onnxruntime import only when needed)
+    from luem.models.cnn import VOCAB_SIZE
     n_params = cnn_params(VOCAB_SIZE)
     fig, ax = plt.subplots(figsize=(14, 4.6))
     ax.set_xlim(0, 14)
@@ -172,7 +151,6 @@ def fig_cnn(path: Path) -> None:
     ax.axis("off")
     ax.grid(False)
 
-    # input characters
     ax.text(0.95, 5.55, "ข้อความบนจอ", ha="center", fontsize=9, color=MUTED)
     for i, ch in enumerate("l;y"):
         box(ax, 0.95, 4.8 - i * 0.62, 0.62, 0.5, ch, fc=BLUE_TINT, ec=BLUE)
@@ -182,7 +160,6 @@ def fig_cnn(path: Path) -> None:
     arrow(ax, 3.85, 4.2, 4.35, 4.2)
     box(ax, 5.3, 4.2, 1.7, 0.95, "Embedding", f"ตัวละ {CNN['emb']} ค่า")
 
-    # four causal convolutions
     ys = [5.35, 4.6, 3.85, 3.1]
     for k, y in zip(CNN["kernels"], ys):
         arrow(ax, 6.15, 4.2, 6.75, y)
@@ -190,7 +167,6 @@ def fig_cnn(path: Path) -> None:
     ax.text(7.65, 2.45, f"ตัวกรองมองทีละ 2–5 ตัวอักษร\nเช่น \"l;y\" (k=3) ไม่เคยพบในภาษาอังกฤษ\n"
                         f"มองแค่ตัวที่พิมพ์แล้ว (causal)", ha="center", va="top", fontsize=8, color=MUTED)
 
-    # pooling
     for y in ys:
         arrow(ax, 8.55, y, 9.1, 4.65 if y > 4.2 else 3.75)
     box(ax, 9.9, 4.65, 1.5, 0.62, "Max-pool", "เจอรูปแปลกไหม")

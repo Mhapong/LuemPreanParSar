@@ -1,13 +1,3 @@
-"""Train the two baseline models from data/processed/train.jsonl only (never val/test).
-
-Usage:
-    uv run python scripts/train_baselines.py                 # both
-    uv run python scripts/train_baselines.py --only ngram --order 4
-
-dictionary: English word list = words seen >= --min-count times in train (Thai words come from pythainlp)
-ngram:      one character LM per language, trained on what users *meant* to type (the intended text)
-"""
-
 import argparse
 import json
 import re
@@ -23,7 +13,6 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def intended_texts(train_path: Path) -> dict[str, list[str]]:
-    """Clean language from normal samples (synthetic hard negatives are not language), by script."""
     by_lang = {"en": [], "th": []}
     with train_path.open(encoding="utf-8") as f:
         for line in f:

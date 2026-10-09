@@ -1,8 +1,3 @@
-"""Check src/luem/layout.py against the system xkb Thai layout.
-
-Usage: uv run python scripts/verify_layout.py [/usr/share/X11/xkb/symbols/th]
-"""
-
 import re
 import sys
 import unicodedata

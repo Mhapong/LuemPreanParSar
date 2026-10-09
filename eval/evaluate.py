@@ -1,15 +1,3 @@
-"""Evaluate models with the two-moment rule: choose thresholds on val, report on test.
-
-Usage:
-    uv run python eval/evaluate.py                                # all models, targets 0.99 and 0.999
-    uv run python eval/evaluate.py --model cnn --target 0.995
-    uv run python eval/evaluate.py --model ngram --limit 0        # all of val/test (slow)
-
-Each model scores val and test once; thresholds are then chosen on val separately for every target.
-Writes eval/results/<model>.json, eval/results/scores/<model>.npz (test full-text scores, for the
-plots) and prints a comparison table. Latency is measured by eval/latency.py on the demo machine.
-"""
-
 import argparse
 import json
 import time
@@ -32,7 +20,6 @@ def score_all(model, rows) -> list[list[float]]:
 
 
 def errors(rows, scores, th) -> dict:
-    """Every false fix and miss on test with what the model saw, for error analysis."""
     out = {"false_fix": [], "missed": []}
     for r, s in zip(rows, scores):
         k = first_fire(s, th.k_min, th.tau_type)

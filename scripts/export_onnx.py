@@ -1,13 +1,3 @@
-"""Export a trained char-CNN checkpoint to ONNX and check it scores exactly like PyTorch.
-
-Usage:
-    uv run python scripts/export_onnx.py                                  # models/cnn.pt -> models/cnn.onnx
-    uv run python scripts/export_onnx.py --ckpt models/cnn_b.pt --out models/cnn_b.onnx
-
-The check runs both on real val chunks through every prefix (the way evaluate.py and the
-daemon call the model) and fails if any probability differs by more than --tol.
-"""
-
 import argparse
 import time
 from pathlib import Path
@@ -49,14 +39,13 @@ def main() -> None:
     print(f"{args.ckpt} (epoch {ckpt['epoch']}, {ckpt['n_params']:,} params) -> {out} "
           f"({out.stat().st_size / 1024:.0f} KB)")
 
-    # same answers? every prefix of real val chunks, PyTorch vs ONNX Runtime
     rows = read_samples(ROOT / "data" / "processed" / "val.jsonl", args.check, seed=3)
     runtime = CNNModel(out)
     worst, n, t0 = 0.0, 0, time.time()
     with torch.no_grad():
         for r in rows:
             ids = np.array(encode(r["text"]), dtype=np.int64)
-            prefixes = np.tril(np.broadcast_to(ids, (len(ids), len(ids))))  # row k = first k+1 chars
+            prefixes = np.tril(np.broadcast_to(ids, (len(ids), len(ids))))
             ref = model(torch.from_numpy(prefixes.copy())).numpy()
             got = runtime._run(prefixes)
             worst = max(worst, float(np.abs(ref - got).max()))

@@ -40,12 +40,12 @@ SPLITS = ("train", "val", "test")
 
 @dataclass(frozen=True, slots=True)
 class Sample:
-    text: str  # what the screen shows
-    active: str  # layout that was active: "en" | "th"
-    label: str  # "ok" | "wrong"
-    intended: str  # what the user meant to type
+    text: str
+    active: str
+    label: str
+    intended: str
     source: str
-    kind: str  # "normal" | "hard_negative" | "tech_wrong"
+    kind: str
     doc: str
 
     def to_dict(self) -> dict:

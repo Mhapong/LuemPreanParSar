@@ -4,8 +4,8 @@ import pytest
 torch = pytest.importorskip("torch")
 pytest.importorskip("onnxruntime")
 
-from luem.models.cnn import VOCAB_SIZE, CNNModel, encode  # noqa: E402
-from luem.models.cnn_net import CharCNN, CharGRU, WithSigmoid  # noqa: E402
+from luem.models.cnn import VOCAB_SIZE, CNNModel, encode
+from luem.models.cnn_net import CharCNN, CharGRU, WithSigmoid
 
 
 @pytest.fixture(scope="module", params=["cnn", "gru"])

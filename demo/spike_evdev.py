@@ -1,17 +1,3 @@
-"""Spike: can we read keys, inject keys, and switch layout on this machine?
-
-Run (after joining the `input` group and re-logging in):
-    uv run --extra demo python demo/spike_evdev.py
-
-Then type in ANOTHER window (xed, Firefox). Keys:
-    F8   inject "hello" + 2x BackSpace via uinput  -> window should show "hel"
-    F9   toggle layout via gsettings               -> type something: did the layout change?
-    F10  toggle layout via Super+Space via uinput  -> same check
-    Ctrl+C in this terminal to quit.
-
-Throwaway code. Nothing is written to disk.
-"""
-
 import os
 import select
 import subprocess
@@ -22,7 +8,7 @@ from evdev import InputDevice, UInput, ecodes, list_devices
 from luem.layout import char_to_key, key_to_char
 
 SCHEMA = "org.cinnamon.desktop.input-sources"
-LAYOUTS = ["en", "th"]  # index = gsettings `current` (sources = [us, th])
+LAYOUTS = ["en", "th"]
 UINPUT_NAME = "luem-spike"
 
 
@@ -53,7 +39,7 @@ def tap(ui: UInput, code: int, shift: bool = False) -> None:
     if shift:
         ui.write(ecodes.EV_KEY, ecodes.KEY_LEFTSHIFT, 0)
     ui.syn()
-    time.sleep(0.005)  # some apps drop events that arrive too fast
+    time.sleep(0.005)
 
 
 def inject_test(ui: UInput) -> None:
@@ -77,12 +63,11 @@ def main() -> None:
         raise SystemExit("No readable keyboard. In `input` group? Re-logged in?  ls -l /dev/input/event*")
     for d in kbds:
         print(f"reading: {d.path}  {d.name}")
-    ui = UInput(name=UINPUT_NAME)  # PermissionError here = /dev/uinput udev rule not applied
+    ui = UInput(name=UINPUT_NAME)
     print(f"uinput ok: {ui.device.path}\nlayout (gsettings) = {get_layout()}\n")
 
     shift_down = set()
     meta_down = set()
-    # gsettings `current` does NOT follow Super+Space (seen on X11), so also track it ourselves
     tracked = get_layout()
     fds = {d.fd: d for d in kbds}
     try:
@@ -98,7 +83,7 @@ def main() -> None:
                     if ev.code in (ecodes.KEY_LEFTMETA, ecodes.KEY_RIGHTMETA):
                         (meta_down.add if ev.value else meta_down.discard)(ev.code)
                         continue
-                    if ev.value != 1:  # 1 = press, 0 = release, 2 = autorepeat
+                    if ev.value != 1:
                         continue
                     if ev.code == ecodes.KEY_SPACE and meta_down:
                         tracked = "th" if tracked == "en" else "en"
@@ -112,7 +97,7 @@ def main() -> None:
                         set_layout(new)
                         print(f">> F9: gsettings set -> {new}, readback = {get_layout()}")
                     elif ev.code == ecodes.KEY_F10:
-                        super_space(ui)  # injected via uinput, so our reader won't see it: update here
+                        super_space(ui)
                         tracked = "th" if tracked == "en" else "en"
                         time.sleep(0.1)
                         print(f">> F10: sent Super+Space, tracked -> {tracked}, gsettings = {get_layout()}")

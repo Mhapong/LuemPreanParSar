@@ -91,7 +91,7 @@ def evaluate(
     hard = np.array([r["kind"] == "hard_negative" for r in rows])
     th_intended = np.array(
         [r["active"] == "en" and r["label"] == "wrong" for r in rows]
-    )  # meant Thai
+    )
     full = np.array([s[-1] for s in prefix_scores])
 
     fire_k = [first_fire(s, th.k_min, th.tau_type) for s in prefix_scores]

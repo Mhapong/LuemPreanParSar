@@ -3,11 +3,9 @@ __pycache__/
 .venv/
 .pytest_cache/
 
-# large / regenerable artifacts
 data/raw/*
 data/processed/*
 models/*
 !**/.gitkeep
 
-# trained CNN (< 1 MB) travels to the notebook via git
 !models/*.onnx

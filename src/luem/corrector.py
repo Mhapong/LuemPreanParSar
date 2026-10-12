@@ -19,7 +19,7 @@ PRINTABLE = frozenset(KEYCODES)
 HOTKEY_FIX, HOTKEY_PAUSE = KEY_F, KEY_P
 LAYOUT_KEYS = {KEY_1: "en", KEY_2: "th"}
 
-Key = tuple[int, bool]  # (keycode, shift)
+Key = tuple[int, bool]
 _THAI_DEPENDENT = frozenset(map(chr, range(0x0E30, 0x0E4F))) - set("เแโใไๆ฿")
 
 
@@ -62,7 +62,7 @@ def render(keys: list[Key], layout: str) -> str:
 
 @dataclass
 class Event:
-    kind: str  # "fix" | "would-fix" | "score" | "layout" | "reset" | "pause"
+    kind: str
     detail: str = ""
     p: float | None = None
 
@@ -72,25 +72,24 @@ class Corrector:
     model: Scorer
     injector: Injector
     th: Thresholds = field(default_factory=Thresholds)
-    layout: str = "en"  # active layout as we track it
+    layout: str = "en"
     enabled: bool = True
-    dry_run: bool = False  # only report what would be fixed, never touch the text
-    caps_lock: bool = False  # set by the daemon from the keyboard LED
-    keys: list[Key] = field(default_factory=list)  # word being typed
-    fixed: bool = False  # current word already converted: never auto-convert it again
-    last_word: list[Key] | None = None  # word before the last Space (for manual fix)
+    dry_run: bool = False
+    caps_lock: bool = False
+    keys: list[Key] = field(default_factory=list)
+    fixed: bool = False
+    last_word: list[Key] | None = None
     last_fixed: bool = False
     pending: tuple[str, str, float | None] | None = (
-        None  # ("word"|"last", why, p): run at flush()
+        None
     )
     at_start: bool = (
-        False  # the word began right after a Space/Enter/Tab we saw (not after a click)
+        False
     )
     last_start: bool = False
     held: set[int] = field(default_factory=set)
     log: list[Event] = field(default_factory=list)
 
-    # ------------------------------------------------------------------ input
 
     def start(self) -> None:
         self.injector.select_layout("en")
@@ -110,9 +109,9 @@ class Corrector:
             bool(self.held & CTRLS),
         )
         if value == 2 and (meta or alt or ctrl):
-            return  # a held shortcut repeats; counting each repeat as a Super+Space toggle drifted the layout
+            return
 
-        if meta and alt and code in LAYOUT_KEYS:  # user selects a layout directly
+        if meta and alt and code in LAYOUT_KEYS:
             self.layout = LAYOUT_KEYS[code]
             self._reset(f"user selected {self.layout}", forget_last=True)
         elif meta and alt and code == HOTKEY_FIX:
@@ -120,10 +119,10 @@ class Corrector:
         elif meta and alt and code == HOTKEY_PAUSE:
             self.enabled = not self.enabled
             self._emit("pause", "resumed" if self.enabled else "paused")
-        elif meta and code == KEY_SPACE:  # user toggles the layout
+        elif meta and code == KEY_SPACE:
             self.layout = other(self.layout)
             self._reset(f"user toggled to {self.layout}", forget_last=True)
-        elif ctrl or alt or meta:  # any other shortcut: cursor/text may change
+        elif ctrl or alt or meta:
             self._reset("shortcut")
             self.at_start = False
         elif code == KEY_BACKSPACE:
@@ -132,13 +131,13 @@ class Corrector:
             self._space()
         elif code in PRINTABLE:
             self._letter(code, shift)
-        else:  # Enter, Tab, arrows, numpad, F-keys, ...
+        else:
             self._reset("non-text key", forget_last=True)
             self.at_start = code in (
                 KEY_ENTER,
                 KEY_KPENTER,
                 KEY_TAB,
-            )  # a new line/field starts a word
+            )
 
     def on_layout(self, layout: str) -> None:
         if layout != self.layout:
@@ -150,15 +149,14 @@ class Corrector:
         self._reset("mouse click", forget_last=True)
         self.at_start = False
 
-    # ------------------------------------------------------------------ typing
 
     def _letter(self, code: int, shift: bool) -> None:
         if (
             self.pending and self.pending[0] == "last"
-        ):  # a new word started before the fix ran
+        ):
             self._drop_pending("next word started")
         self.last_word = None
-        if self.caps_lock:  # Caps Lock changes what keys produce; don't guess
+        if self.caps_lock:
             self._reset("caps lock on")
             return
         self.keys.append((code, shift))
@@ -178,16 +176,15 @@ class Corrector:
     def _space(self) -> None:
         if (
             self.pending and self.pending[0] == "word"
-        ):  # decided while typing, Space came first
+        ):
             self.pending = ("last", *self.pending[1:])
-        elif self.pending:  # second Space before the fix ran
+        elif self.pending:
             self._drop_pending("kept typing")
         elif (
             self.keys and self.enabled and not self.fixed and len(self.keys) <= MAX_LEN
         ):
             p = self._score(render(self.keys, self.layout), "␣")
             if p >= self.th.tau_space:
-                # the app already received this Space: the fix deletes it too and types it again
                 self.pending = ("last", "on Space", p)
         self.last_word, self.last_fixed, self.last_start = (
             (self.keys or None),
@@ -203,7 +200,7 @@ class Corrector:
             self.keys.pop()
             if not self.keys:
                 self.fixed = False
-        elif self.last_word:  # deleted the Space: we are back inside the previous word
+        elif self.last_word:
             self.keys, self.fixed, self.at_start = (
                 self.last_word,
                 self.last_fixed,
@@ -212,7 +209,6 @@ class Corrector:
             self.last_word = None
 
     def _score(self, text: str, suffix: str = "") -> float:
-        """P(wrong layout) for the word on screen: Thai spelling rule first, then the model."""
         if self.layout == "th" and impossible_thai(text, self.at_start):
             p, why = 1.0, "  (Thai word can't start like this)"
         else:
@@ -221,7 +217,6 @@ class Corrector:
         return p
 
     def _manual_fix(self) -> None:
-        """Convert the word being typed, or the one just finished. Converting twice undoes it."""
         if self.keys:
             self.pending = ("word", "manual", None)
         elif self.last_word:
@@ -229,17 +224,15 @@ class Corrector:
         else:
             self._emit("reset", "manual fix: nothing to convert")
 
-    # ------------------------------------------------------------------ output
 
     def flush(self) -> None:
-        """Run the pending fix. Call only while no key is held (see module docstring)."""
         if not self.pending:
             return
         target, why, p = self.pending
         self.pending = None
         if target == "word" and self.keys:
             self._convert(self.keys, with_space=False, why=why, p=p)
-            self.fixed = True  # the user keeps typing this word in the right layout now
+            self.fixed = True
         elif target == "last" and self.last_word:
             self._convert(self.last_word, with_space=True, why=why, p=p)
             self.last_fixed = True
@@ -260,7 +253,7 @@ class Corrector:
         self.injector.backspace(len(keys) + with_space)
         self.injector.select_layout(
             target
-        )  # absolute selection: correct even if tracking drifted
+        )
         self.layout = target
         self.injector.press_keys(keys + ([(KEY_SPACE, False)] if with_space else []))
         self._emit("fix", f"{before!r} -> {render(keys, target)!r} ({why})", p)
@@ -268,7 +261,7 @@ class Corrector:
     def _reset(self, why: str, forget_last: bool = False) -> None:
         if self.keys or self.pending or (forget_last and self.last_word):
             self._emit("reset", why)
-        if self.keys:  # what follows continues a word already on screen
+        if self.keys:
             self.at_start = False
         self.keys, self.fixed, self.pending = [], False, None
         if forget_last:

@@ -1,13 +1,3 @@
-"""Latency per keystroke, measured the way the daemon pays it: one predict() on the current buffer.
-
-Run it on the demo notebook (CPU, 1 thread), since that is where it matters:
-    uv run python eval/latency.py
-    uv run python eval/latency.py --model cnn --chunks 2000
-
-Typing each test chunk character by character gives a realistic mix of buffer lengths (1..32).
-Writes eval/results/latency_<os>.json, so results from the PC and the notebook live side by side.
-"""
-
 import argparse
 import json
 import platform
@@ -20,7 +10,7 @@ from luem.dataset import read_samples
 from luem.models import MODELS_DIR, NAMES, load_model
 
 ROOT = Path(__file__).resolve().parent.parent
-BUDGET_MS = 5.0  # docs/IMPLEMENTATION_PLAN.md section 6: under 5 ms per keystroke feels instant
+BUDGET_MS = 5.0
 
 
 def cpu_name() -> str:

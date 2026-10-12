@@ -1,16 +1,3 @@
-"""Train the char-CNN (or, with --arch gru, the comparison GRU) on data/processed/train.jsonl, pick the best epoch on val, save models/cnn.pt.
-
-Usage:
-    uv run python scripts/train_cnn.py --limit 20000 --epochs 2          # quick check on any machine
-    uv run python scripts/train_cnn.py                                  # full run (GPU if available)
-    uv run python scripts/train_cnn.py --channels 128 --hard-weight 3 --out models/cnn_b.pt
-    uv run python scripts/train_cnn.py --arch gru --out models/gru.pt
-then: uv run python scripts/export_onnx.py && uv run python eval/evaluate.py --model cnn
-
-The dataset stores full chunks. Every time a sample is drawn, the batch is cut to a random prefix
-(what the screen shows while the user is still typing), so each epoch sees different prefixes.
-"""
-
 import argparse
 import json
 import math
@@ -34,7 +21,6 @@ DATA = ROOT / "data" / "processed"
 
 
 def first_judgeable(text: str) -> int:
-    """Shortest prefix length with a letter: shorter prefixes are always scored 0 by the wrapper."""
     for k in range(1, len(text) + 1):
         if script_of_chunk(text[:k]):
             return k
@@ -71,9 +57,8 @@ def cut_to_prefix(
 def validate(
     net, val: TensorDataset, device, batch_size: int, hard: torch.Tensor
 ) -> dict:
-    """Loss on full chunks and on fixed random prefixes, AP, and false fixes on hard negatives."""
     net.eval()
-    gen = torch.Generator(device=device).manual_seed(0)  # same prefixes every epoch
+    gen = torch.Generator(device=device).manual_seed(0)
     out = {"full": [], "prefix": []}
     for i in range(0, len(val), batch_size):
         ids, lens, first, y, _ = (t[i : i + batch_size].to(device) for t in val.tensors)
@@ -89,8 +74,6 @@ def validate(
         "loss_full": F.binary_cross_entropy(p_full, y).item(),
         "loss_prefix": F.binary_cross_entropy(p_pre, y).item(),
         "ap_full": average_precision(yy, pf),
-        # threshold-free view of the problem n-gram had: how many hard negatives score above
-        # the score that catches 95% of wrong chunks
         "hardneg_fp_at_r95": float((pf[hh] >= np.quantile(pf[yy], 0.05)).mean()),
     }
 
@@ -159,7 +142,6 @@ def main() -> None:
         f"{' (' + torch.cuda.get_device_name(device) + ')' if device.type == 'cuda' else ''} ({time.time() - t0:.0f}s)"
     )
 
-    # sampler yields whole index lists: one tensor gather per batch instead of batch_size small ones
     loader = DataLoader(
         train,
         sampler=BatchSampler(RandomSampler(train), args.batch_size, drop_last=False),

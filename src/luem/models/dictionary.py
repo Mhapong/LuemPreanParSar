@@ -1,9 +1,3 @@
-"""Model 1 (baseline): look both readings up in a dictionary.
-
-For "l;ylfu" compare how much of "l;ylfu" is English words with how much of "สวัสดี" is Thai words.
-The last word may still be half-typed, so it also counts if it is the start of a dictionary word.
-"""
-
 import re
 from pathlib import Path
 
@@ -20,7 +14,7 @@ class DictionaryModel(Model):
     name = "dictionary"
 
     def __init__(self, en_words: set[str], th_words: set[str]):
-        from pythainlp.tokenize import word_tokenize  # heavy import, only needed here
+        from pythainlp.tokenize import word_tokenize
 
         self._tokenize = word_tokenize
         self.en_words, self.th_words = en_words, th_words
@@ -34,7 +28,6 @@ class DictionaryModel(Model):
         return cls(en, set(thai_words()))
 
     def coverage(self, text: str, lang: str) -> float:
-        """Fraction of letters that belong to dictionary words (last word: prefix of one is enough)."""
         if lang == "en":
             tokens = [t.lower() for t in _EN_WORD.findall(text)]
             words, prefixes = self.en_words, self.en_prefixes

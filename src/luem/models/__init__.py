@@ -1,5 +1,3 @@
-"""Model registry: load any trained model by name, so eval and demo can swap models freely."""
-
 from pathlib import Path
 
 from luem.models.base import Model
@@ -23,5 +21,5 @@ def load_model(name: str, models_dir: Path = MODELS_DIR) -> Model:
     if name == "ngram":
         from luem.models.ngram import NgramModel
         return NgramModel.load(path)
-    from luem.models.cnn import CNNModel  # cnn and gru: same ONNX interface, see cnn.py
+    from luem.models.cnn import CNNModel
     return CNNModel.load(path, name)

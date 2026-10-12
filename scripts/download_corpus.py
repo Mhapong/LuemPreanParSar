@@ -1,13 +1,3 @@
-"""Download raw text corpora to data/raw/<source>.jsonl ({"id", "text"} per line).
-
-Usage:
-    uv run python scripts/download_corpus.py                  # all sources, default limits
-    uv run python scripts/download_corpus.py --only wiki_th --limit 1000
-    uv run python scripts/download_corpus.py --limit 0        # no limit (wiki_en is ~20 GB!)
-
-Streams from the Hugging Face Hub, so only the rows we keep are downloaded.
-"""
-
 import argparse
 import json
 from pathlib import Path
@@ -16,10 +6,8 @@ from datasets import load_dataset
 
 RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "raw"
 
-# name -> (hf repo, config, text column, default article limit)
 SOURCES = {
     "wisesight": ("pythainlp/wisesight_sentiment", "wisesight_sentiment", "texts", 0),
-    # ~10 KB/article (th), ~3 KB/article (en): plenty of segments for 1-2M samples
     "wiki_th": ("wikimedia/wikipedia", "20231101.th", "text", 20_000),
     "wiki_en": ("wikimedia/wikipedia", "20231101.en", "text", 20_000),
 }
@@ -31,14 +19,12 @@ def download(name: str, limit: int | None) -> None:
     limit = default_limit if limit is None else limit
     out = RAW_DIR / f"{name}.jsonl"
 
-    # Wisesight is tiny: take every split. Wikipedia has only "train".
     splits = ["train", "validation", "test"] if name == "wisesight" else ["train"]
     n = 0
     with out.open("w", encoding="utf-8") as f:
         for split in splits:
             ds = load_dataset(repo, config, split=split, streaming=True)
             if name.startswith("wiki"):
-                # Shuffle so a limit doesn't keep only alphabetically-first articles
                 ds = ds.shuffle(seed=SEED, buffer_size=10_000)
             for i, row in enumerate(ds):
                 text = (row[column] or "").strip()

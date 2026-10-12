@@ -23,10 +23,10 @@ def test_normalize_maps_untypeable_lookalikes():
 def test_script_requires_single_layout_and_a_letter():
     assert script_of_chunk("สวัสดี") == "th"
     assert script_of_chunk("hello,") == "en"
-    assert script_of_chunk("ไปWiFi") is None      # mixed layouts in one chunk
-    assert script_of_chunk("ค.ศ.1926") is None    # th layout has no ASCII digits
-    assert script_of_chunk("1926") is None        # no letters
-    assert script_of_chunk("café") is None        # é is not on either layout
+    assert script_of_chunk("ไปWiFi") is None
+    assert script_of_chunk("ค.ศ.1926") is None
+    assert script_of_chunk("1926") is None
+    assert script_of_chunk("café") is None
 
 
 def test_chunks_filter_and_truncate():

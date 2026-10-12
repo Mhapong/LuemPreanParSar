@@ -45,6 +45,5 @@ def test_average_precision_perfect_ranking():
 
 
 def test_precision_drops_at_low_base_rate():
-    # 99% recall and 1% false fixes look great on 50/50 data, but only ~67% precision if 2% of words are wrong
     assert round(precision_at_base_rate(0.99, 0.01, 0.5), 2) == 0.99
     assert round(precision_at_base_rate(0.99, 0.01, 0.02), 2) == 0.67

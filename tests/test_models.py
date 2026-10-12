@@ -23,21 +23,21 @@ def test_views():
 def test_witten_bell_is_a_distribution():
     lm = CharNgramLM(3).fit(EN)
     seen = sorted({c for w in EN for c in w})
-    alphabet = seen + [chr(0x2500 + i) for i in range(VOCAB - len(seen))]  # VOCAB distinct chars
+    alphabet = seen + [chr(0x2500 + i) for i in range(VOCAB - len(seen))]
     for h in ("", "h", "he", "zz"):
         assert math.isclose(sum(lm.prob(h, c) for c in alphabet), 1.0, rel_tol=1e-9)
 
 
 def test_ngram_detects_wrong_layout(model):
-    assert model.predict("l;ylfu") > 0.9       # meant สวัสดี
-    assert model.predict("้ำสสน") > 0.9         # meant hello
+    assert model.predict("l;ylfu") > 0.9
+    assert model.predict("้ำสสน") > 0.9
     assert model.predict("hello") < 0.1
     assert model.predict("สวัสดี") < 0.1
 
 
 def test_no_letters_means_no_fix(model):
     assert model.predict("555") == 0.0
-    assert model.predict_prefixes("(hello") [0] == 0.0  # "(" alone: no evidence yet
+    assert model.predict_prefixes("(hello") [0] == 0.0
 
 
 def test_prefix_scores_match_predict(model):
